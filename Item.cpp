@@ -1,4 +1,4 @@
-class Item {
+class Item {  //comment
 	private:
 		int id;
 		double startingPrice;
