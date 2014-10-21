@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-class Item {  //test zakia
-=======
-class Item { //hello
->>>>>>> origin/master
+class Item {
 	private:
 		int id;
 		double startingPrice;
