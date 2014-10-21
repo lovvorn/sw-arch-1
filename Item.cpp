@@ -1,4 +1,4 @@
-class Item {
+class Item { //hello
 	private:
 		int id;
 		double startingPrice;
