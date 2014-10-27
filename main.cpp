@@ -51,7 +51,22 @@ Display(){
 }
 menu(){
 		cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit"
-		cin>>choice;
+		
+        cin>>choice;
 		if(choice==1){Display();}
 	}
+        cin>>choice;
+                         if (choice==2) {?();)}
+            
+        cin>>choice;
+                         if (choice==3) {?();)}
+            
+        cin>>choice;
+                         if (choice==4) {?();)}
+                         
+        cin>>choice;
+                         if (choice==5) {?();)}
+                         
+        cin>>choice;
+                         if (choice==6) {?();)}
 
