@@ -1,16 +1,10 @@
-class Item {
+class Buyer {
 	private:
-		int id;
-		double startingPrice;
-		int sellerID;
-		double highestPrice;
-		int highestBidder;
-		string name;
+		int BuyerId;
+		string BuyerName;
 	public:
-		int getID() { return id; }
-		double getStartingPrice() { return startingPrice; }
-		int getSellerID() { return sellerID; }
-		double getHighestPrice() { return highestPrice; }
-		int getHighestBidder() { return highestBidder; }
-		string getName() { return name; }		
+		int getBuyerID() { return id; }
+        string getBuyerName() {return name;}
+        int setId; {return id;} // not sure about it!
+        string setName; {return name;} // not sure about it!!
 }
