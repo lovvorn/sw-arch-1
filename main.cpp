@@ -16,6 +16,7 @@ int bidIndex = 0;
 
 int main()
 {
+    def menu
 	
 }
 
@@ -28,3 +29,8 @@ void initSellers()
 		sellers[4] = new Seller(4, "Billy the Kid");
 		sellerIndex = 5;
 }
+
+menu(){
+	cout<<"What you want to do?\n"
+    cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit"
+	}
