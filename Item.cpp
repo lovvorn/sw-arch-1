@@ -12,5 +12,8 @@ class Item {
 		int getSellerID() { return sellerID; }
 		double getHighestPrice() { return highestPrice; }
 		int getHighestBidder() { return highestBidder; }
-		string getName() { return name; }		
+		string getName() { return name; }
+		
+		//Constructor
+		Item(int, double, int, double, int, string);
 }
