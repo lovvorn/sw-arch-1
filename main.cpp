@@ -30,7 +30,11 @@ void initSellers()
 
 void initItems()
 {
-	items[0] = new Item (0, 200.00, 4, -1, -1, "
+	items[0] = new Item (0, 200.00, 4, -1, -1, "Mona Lisa");
+	items[1] = new Item (1, 25.00, 3, -1, -1, "Toast with Mary Burn");
+	items[2] = new Item (2, 5000.00, 2, -1, -1, "First Lightbullb");
+	items[3] = new Item(3, 9000.00, 1, -1, -1, "Banana Peel");
+	items[4] = new Item(4, 1000000.00, 0, -1, -1, "Happy Little Tree");
 	itemIndex = 5;
 }
 
