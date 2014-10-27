@@ -1,9 +1,9 @@
 class seller { 
 	private:
-		int id;
+		int SellerId;
 		string name;
 	public:
-		int getID() { return id; }
+		int getID() { return SellerId; }
 		string getName() { return name; }
 		setName(String tname){name=tname;}
 		setId(int tid){id=tid;}
