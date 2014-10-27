@@ -34,12 +34,6 @@ void initItems()
 	itemIndex = 5;
 }
 
-menu(){
-	cout<<"What you want to do?\n"
-<<<<<<< HEAD
-	cout<<"1. List Items\n2. Bid Items\n"
-	}
-
 Display(){
 	for(int i=0;i<itemIndex;i++)
 	{
