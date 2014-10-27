@@ -45,6 +45,9 @@ Display(){
 
 	}
 }
-    cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit"
+menu(){
+		cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit"
+		cin>>choice;
+		if(choice==1){Display();}
 	}
 
