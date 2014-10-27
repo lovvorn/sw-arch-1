@@ -5,11 +5,10 @@ using namespace std;
 
 int main()
 {
-	
-}
 
 menu(){
 	cout<<"What you want to do?\n"
+<<<<<<< HEAD
 	cout<<"1. List Items\n2. Bid Items\n"
 	}
 
@@ -24,3 +23,8 @@ Display(){
 
 	}
 }
+=======
+    cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit"
+	}
+}
+>>>>>>> origin/master
