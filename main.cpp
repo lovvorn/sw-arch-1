@@ -16,10 +16,8 @@ int bidIndex = 0;
 
 int main()
 {
-    def menu
-	
-}
 
+}
 void initSellers()
 {
 		sellers[0] = new Seller(0, "Bob Ross");
@@ -28,6 +26,12 @@ void initSellers()
 		sellers[3] = new Seller(3, "Jack Williams");
 		sellers[4] = new Seller(4, "Billy the Kid");
 		sellerIndex = 5;
+}
+
+void initItems()
+{
+	items[0] = new Item (0, 200.00, 4, -1, -1, "
+	itemIndex = 5;
 }
 
 menu(){
