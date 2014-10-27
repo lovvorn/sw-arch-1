@@ -1,4 +1,9 @@
 #include <iostream>
+#include "Bid.cpp"
+#include "Buyer.cpp"
+#include "Item.cpp"
+#include "Transaction.cpp"
+#include "seller.cpp"
 
 using namespace std;
 
@@ -16,7 +21,7 @@ int bidIndex = 0;
 
 int main()
 {
-
+	
 }
 void initSellers()
 {
@@ -30,22 +35,25 @@ void initSellers()
 
 void initItems()
 {
-	items[0] = new Item (0, 200.00, 4, -1, -1, "Mona Lisa");
-	items[1] = new Item (1, 25.00, 3, -1, -1, "Toast with Mary Burn");
-	items[2] = new Item (2, 5000.00, 2, -1, -1, "First Lightbullb");
-	items[3] = new Item(3, 9000.00, 1, -1, -1, "Banana Peel");
-	items[4] = new Item(4, 1000000.00, 0, -1, -1, "Happy Little Tree");
+	items[0] = new Item (0, 200.00, 4, -1, -1, "Mona Lisa", false);
+	items[1] = new Item (1, 25.00, 3, -1, -1, "Toast with Mary Burn", false);
+	items[2] = new Item (2, 5000.00, 2, -1, -1, "First Lightbulb", false);
+	items[3] = new Item(3, 9000.00, 1, -1, -1, "Banana Peel", false);
+	items[4] = new Item(4, 1000000.00, 0, -1, -1, "Happy Little Tree", false);
 	itemIndex = 5;
 }
 
 Display(){
 	for(int i=0;i<itemIndex;i++)
 	{
-		cout<<"Item %d information:"<<i;
-		cout<<"Item Id: "<<items[i].getID()<<"\n";
-		cout<<"Item Name: "<<items[i].getName()<<"\n";
-		cout<<"Item highestPrice: "<<items[i].getHighestPrice()<<"\n";
-		cout<<"Item highestBidder: "<<items[i].getHighestBidder()<<"\n";
+		if(!items[i].isSold())
+		{
+			cout<<"Item %d information:"<<i;
+			cout<<"Item Id: "<<items[i].getID()<<"\n";
+			cout<<"Item Name: "<<items[i].getName()<<"\n";
+			cout<<"Item highestPrice: "<<items[i].getHighestPrice()<<"\n";
+			cout<<"Item highestBidder: "<<items[i].getHighestBidder()<<"\n";
+		}
 
 	}
 }
