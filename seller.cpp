@@ -1,4 +1,4 @@
-class seller { 
+class Seller { 
 	private:
 		int SellerId;
 		string name;
@@ -7,4 +7,8 @@ class seller {
 		string getName() { return name; }
 		setName(String tname){name=tname;}
 		setId(int tid){id=tid;}
+		
+		//Constructor
+		Seller(int, string);
+		
 }
