@@ -5,6 +5,6 @@ class Buyer {
 	public:
 		int getBuyerID() { return id; }
         string getBuyerName() {return name;}
-        int setId; {return id;} // not sure about it!
-        string setName; {return name;} // not sure about it!!
+        setId(int tid) {id=tid;} // not sure about it!
+        setName(String tname) {name=tname;} // not sure about it!!
 }
