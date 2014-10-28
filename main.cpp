@@ -113,7 +113,7 @@ void Bid()
 }
 
 menu(){
-		cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit"
+		cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit\nChoice: "
         cin>>choice;
         if(choice==1){List_Items();}
         else if (choice==2) {Bid();)}
