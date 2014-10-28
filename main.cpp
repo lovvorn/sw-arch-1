@@ -21,28 +21,28 @@ int bidIndex = 0;
 
 int main()
 {
-	while (1)
+	while(1)
 	{
 		menu();
 	}
 }
 void initSellers()
 {
-		sellers[0] = new Seller(0, "Bob Ross");
-		sellers[1] = new Seller(1, "Andy Warhol");
-		sellers[2] = new Seller(2, "Phil Robinson");
-		sellers[3] = new Seller(3, "Jack Williams");
-		sellers[4] = new Seller(4, "Billy the Kid");
+		sellers[0].setData(0, "Bob Ross");
+		sellers[1].setData(1, "Andy Warhol");
+		sellers[2].setData(2, "Phil Robinson");
+		sellers[3].setData(3, "Jack Williams");
+		sellers[4].setData(4, "Billy the Kid");
 		sellerIndex = 5;
 }
 
 void initItems()
 {
-	items[0] = new Item (0, 200.00, 4, -1, -1, "Mona Lisa", false);
-	items[1] = new Item (1, 25.00, 3, -1, -1, "Toast with Mary Burn", false);
-	items[2] = new Item (2, 5000.00, 2, -1, -1, "First Lightbulb", false);
-	items[3] = new Item(3, 9000.00, 1, -1, -1, "Banana Peel", false);
-	items[4] = new Item(4, 1000000.00, 0, -1, -1, "Happy Little Tree", false);
+	items[0].setData(0, 200.00, 4, -1, -1, "Mona Lisa", false);
+	items[1].setData(1, 25.00, 3, -1, -1, "Toast with Mary Burn", false);
+	items[2].setData(2, 5000.00, 2, -1, -1, "First Lightbulb", false);
+	items[3].setData(3, 9000.00, 1, -1, -1, "Banana Peel", false);
+	items[4].setData(4, 1000000.00, 0, -1, -1, "Happy Little Tree", false);
 	itemIndex = 5;
 }
 
