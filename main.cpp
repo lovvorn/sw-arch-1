@@ -46,7 +46,7 @@ void initItems()
 	itemIndex = 5;
 }
 
-List_Items(){
+void List_Items(){
 	for(int i=0;i<itemIndex;i++)
 	{
 		if(!items[i].isSold())
@@ -113,6 +113,7 @@ void Bid()
 }
 
 void menu(){
+		int choice;
 		cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit\nChoice: ";
         cin>>choice;
         if(choice==1){List_Items();}
