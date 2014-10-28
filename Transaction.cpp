@@ -4,7 +4,7 @@ class Transaction{
 		int SellerID;
 		int BuyerID;
 	public:
-		Transaction();
+		Transaction(){};
 		void setData(int sid, int bid, int tid){TranID=tid; SellerID=sid; BuyerID=bid;}
 		int getID() { return TranID; }
 		void setID(int tid){TranID=tid;}

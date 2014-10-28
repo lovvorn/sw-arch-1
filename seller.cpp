@@ -9,7 +9,7 @@ class Seller {
 		void setName(string tname){SellerName=tname;}
 		
 		//Constructor
-		Seller();
+		Seller(){};
 		void setData(int, string);
 		
 };

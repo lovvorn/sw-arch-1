@@ -85,7 +85,7 @@ void Add_Item(){
 	cin>>price;
 	cout<<"Enter your seller ID#: "<< endl;
 	cin>>sid;
-	items[itemIndex].setData(itemIndex, price, -1, -1, iname, false);
+	items[itemIndex].setData(itemIndex, price, sid, -1.00, -1, iname, false);
 	itemIndex++;
 }
 

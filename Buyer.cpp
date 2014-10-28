@@ -8,6 +8,6 @@ class Buyer {
 		void setId(int tid) {BuyerID=tid;} // not sure about it!
 		void setName(string tname) {BuyerName=tname;} // not sure about it!!
 		
-		Buyer();
+		Buyer(){};
 		void setData(int id, string name){BuyerID=id; BuyerName=name;}
 };

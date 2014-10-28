@@ -18,6 +18,6 @@ class Item {
 		void setSold(bool _sold) { sold = _sold; }
 		
 		//Constructor
-		Item();
+		Item(){};
 		void setData(int, double, int, double, int, string, bool);
 };
