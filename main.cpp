@@ -120,10 +120,13 @@ void Bid() {
     cout<<"What is your bid: $";
     cin>>proposed_price;
     
-    bids[bidIndex].setData(bidIndex++, BuyerID, ItemID, proposed_price);
-    if(items[ItemID].getHighestPrice() < proposed_price and proposed_price > items[ItemID].getStartingPrice())
+	if(proposed_price >= items[ItemID].getStartingPrice())
+		bids[bidIndex].setData(bidIndex++, BuyerID, ItemID, proposed_price);
+    if((items[ItemID].getHighestPrice() < proposed_price) && (proposed_price >= items[ItemID].getStartingPrice()))
+	{
         items[ItemID].setHighestPrice(proposed_price);
         items[ItemID].setHighestBidder(BuyerID);
+	}
 }
 
 void menu(){
