@@ -15,6 +15,7 @@ class Item {
 		int getHighestBidder() { return highestBidder; }
 		string getName() { return name; }
 		bool isSold() { return sold; }
+		void setSold(bool _sold) { sold = _sold; }
 		
 		//Constructor
 		Item(int, double, int, double, int, string, bool);

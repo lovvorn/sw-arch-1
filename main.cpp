@@ -94,14 +94,29 @@ void Add_Item(){
 	itemIndex++;
 }
 
+void End_Bidding()
+{
+	int id;
+	cout<<"What is the id of the item you wish to end bidding on?\n";
+	cout<<"id: ";
+	cin>>id;
+	items[id].setSold(true);
+	cout<<"\nItem status has been set to 'sold'\n";
+}
+
+void Bid()
+{
+	cout<<"\nbid\n";
+}
+
 menu(){
 		cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit"
         cin>>choice;
         if(choice==1){List_Items();}
-        else if (choice==2) {?();)}
+        else if (choice==2) {Bid();)}
         else if (choice==3) {Add_Buyer()}
         else if (choice==4) {Add_Item();)}
         else if (choice==5) {Display_Trans();}
-        else if (choice==6) {?();)}
+        else if (choice==6) {End_Bidding();)}
 
 }
