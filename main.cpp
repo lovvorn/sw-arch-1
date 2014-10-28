@@ -1,4 +1,9 @@
 #include <iostream>
+#include "Bid.cpp"
+#include "Buyer.cpp"
+#include "Item.cpp"
+#include "Transaction.cpp"
+#include "seller.cpp"
 
 using namespace std;
 
@@ -16,7 +21,7 @@ int bidIndex = 0;
 
 int main()
 {
-
+	
 }
 void initSellers()
 {
@@ -30,43 +35,73 @@ void initSellers()
 
 void initItems()
 {
-	items[0] = new Item (0, 200.00, 4, -1, -1, "Mona Lisa");
-	items[1] = new Item (1, 25.00, 3, -1, -1, "Toast with Mary Burn");
-	items[2] = new Item (2, 5000.00, 2, -1, -1, "First Lightbullb");
-	items[3] = new Item(3, 9000.00, 1, -1, -1, "Banana Peel");
-	items[4] = new Item(4, 1000000.00, 0, -1, -1, "Happy Little Tree");
+	items[0] = new Item (0, 200.00, 4, -1, -1, "Mona Lisa", false);
+	items[1] = new Item (1, 25.00, 3, -1, -1, "Toast with Mary Burn", false);
+	items[2] = new Item (2, 5000.00, 2, -1, -1, "First Lightbulb", false);
+	items[3] = new Item(3, 9000.00, 1, -1, -1, "Banana Peel", false);
+	items[4] = new Item(4, 1000000.00, 0, -1, -1, "Happy Little Tree", false);
 	itemIndex = 5;
 }
 
-Display(){
+List_Items(){
 	for(int i=0;i<itemIndex;i++)
 	{
-		cout<<"Item %d information:"<<i;
-		cout<<"Item Id: "<<items[i].getID()<<"\n";
-		cout<<"Item Name: "<<items[i].getName()<<"\n";
-		cout<<"Item highestPrice: "<<items[i].getHighestPrice()<<"\n";
-		cout<<"Item highestBidder: "<<items[i].getHighestBidder()<<"\n";
+		if(!items[i].isSold())
+		{
+			cout<<"Item %d information:"<<i;
+			cout<<"Item Id: "<<items[i].getID()<<"\n";
+			cout<<"Item Name: "<<items[i].getName()<<"\n";
+			cout<<"Item highestPrice: "<<items[i].getHighestPrice()<<"\n";
+			cout<<"Item highestBidder: "<<items[i].getHighestBidder()<<"\n";
+		}
 
 	}
 }
+void Display_Trans(){
+
+	for(int i=0;i<transactionIndex;i++)
+	{
+		
+		cout<<"Transaction %d information:\n"<<i;
+		cout<<"Transaction Id: "<<transactions[i].getID()<<"\n";
+		cout<<"Seller Id: "<<transactions[i].getSellerID()<<"\n";
+		cout<<"Buyer Id: "<<transactions[i].getBuyerID()<<"\n";
+	
+	}
+}
+
+
+void Add_Buyer(){
+	string bname;
+	int bid;
+	cout<<"Enter buyer name";
+	cin>>bname;
+	buyers[buyerIndex] = new Buyer(buyerIndex, bname);
+	buyerIndex++;
+}
+
+void Add_Item(){
+	string iname;
+	double price;
+	int sid;
+	cout<<"Enter the item name: "<<endl;
+	cin>>iname;
+	cout<<"Enter the starting price: "<<endl;
+	cin>>price;
+	cout<<"Enter your seller ID#: "<< endl;
+	cin>>sid;
+	items[itemIndex] = new Item(itemIndex, price, -1, -1, iname, false);
+	itemIndex++;
+}
+
 menu(){
 		cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit"
-		
         cin>>choice;
-                        if(choice==1){Display();}
-	}
-        cin>>choice;
-                         if (choice==2) {?();)}
-            
-        cin>>choice;
-                         if (choice==3) {?();)}
-            
-        cin>>choice;
-                         if (choice==4) {?();)}
-                         
-        cin>>choice;
-                         if (choice==5) {?();)}
-                         
-        cin>>choice;
-                         if (choice==6) {?();)}
+        if(choice==1){List_Items();}
+        else if (choice==2) {?();)}
+        else if (choice==3) {Add_Buyer()}
+        else if (choice==4) {Add_Item();)}
+        else if (choice==5) {Display_Trans();}
+        else if (choice==6) {?();)}
 
+}
