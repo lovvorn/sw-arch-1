@@ -1,11 +1,12 @@
 #include <iostream>
-using namespace std;
+
 #include "Bid.cpp"
 #include "Buyer.cpp"
 #include "Item.cpp"
 #include "Transaction.cpp"
 #include "seller.cpp"
 
+using namespace std;
 
 Item items[20];
 Buyer buyers[20];
@@ -18,6 +19,7 @@ int buyerIndex = 0;
 int sellerIndex = 0;
 int transactionIndex = 0;
 int bidIndex = 0;
+
 void initSellers()
 {
 		sellers[0].setData(0, "Bob Ross");
@@ -52,6 +54,7 @@ void List_Items(){
 
 	}
 }
+
 void Display_Trans(){
 
 	for(int i=0;i<transactionIndex;i++)
