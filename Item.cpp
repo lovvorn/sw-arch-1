@@ -18,6 +18,6 @@ class Item {
 		void setSold(bool _sold) { sold = _sold; }
 		
 		//Constructor
-		Item(){};
-		void setData(int, double, int, double, int, string, bool);
+		Item(){}
+		void setData(int _id, double _startingPrice, int _sellerID, double _highestPrice, int _highestBidder, string _name, bool _sold) {id = _id; startingPrice = _startingPrice; sellerID = _sellerID; highestPrice = _highestPrice; highestBidder = _highestBidder; name = _name; sold = _sold;}
 };
