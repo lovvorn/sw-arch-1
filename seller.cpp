@@ -10,6 +10,6 @@ class Seller {
 		
 		//Constructor
 		Seller(){};
-		void setData(int, string);
+		void setData(int _SellerID, string _SellerName) { SellerID = _SellerID; SellerName = _SellerName; }
 		
 };

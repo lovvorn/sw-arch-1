@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;s
 
 #include "Bid.cpp"
 #include "Buyer.cpp"
@@ -6,7 +7,6 @@
 #include "Transaction.cpp"
 #include "seller.cpp"
 
-using namespace std;
 
 Item items[20];
 Buyer buyers[20];
