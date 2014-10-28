@@ -18,14 +18,6 @@ int buyerIndex = 0;
 int sellerIndex = 0;
 int transactionIndex = 0;
 int bidIndex = 0;
-
-int main()
-{
-	while(1)
-	{
-		menu();
-	}
-}
 void initSellers()
 {
 		sellers[0].setData(0, "Bob Ross");
@@ -79,7 +71,7 @@ void Add_Buyer(){
 	int bid;
 	cout<<"Enter buyer name";
 	cin>>bname;
-	buyers[buyerIndex] = new Buyer(buyerIndex, bname);
+	buyers[buyerIndex].setData(buyerIndex, bname);
 	buyerIndex++;
 }
 
@@ -93,7 +85,7 @@ void Add_Item(){
 	cin>>price;
 	cout<<"Enter your seller ID#: "<< endl;
 	cin>>sid;
-	items[itemIndex] = new Item(itemIndex, price, -1, -1, iname, false);
+	items[itemIndex].setData(itemIndex, price, -1, -1, iname, false);
 	itemIndex++;
 }
 
@@ -111,7 +103,6 @@ void Bid()
 {
 	cout<<"\nbid\n";
 }
-
 void menu(){
 		int choice;
 		cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit\nChoice: ";
@@ -124,3 +115,13 @@ void menu(){
         else if (choice==6) {End_Bidding();}
 
 }
+
+int main()
+{
+	while(1)
+	{
+		menu();
+	}
+}
+
+
