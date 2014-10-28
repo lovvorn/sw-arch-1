@@ -1,4 +1,10 @@
 sw-arch-1
 =========
 
-Members:
+### Group Members:
+* Nafiseh
+* Zakia
+* Hunter
+* Chase
+* Will
+
