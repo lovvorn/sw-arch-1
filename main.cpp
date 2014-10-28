@@ -121,7 +121,7 @@ void Bid() {
     cin>>proposed_price;
     
     bids[bidIndex].setData(bidIndex++, BuyerID, ItemID, proposed_price);
-    if(items[ItemID].getHighestPrice() < proposed_price)
+    if(items[ItemID].getHighestPrice() < proposed_price and proposed_price > items[ItemID].getStartingPrice())
         items[ItemID].setHighestPrice(proposed_price);
         items[ItemID].setHighestBidder(BuyerID);
 }
