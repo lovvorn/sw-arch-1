@@ -1,12 +1,12 @@
 class Seller { 
 	private:
-		int SellerId;
-		string name;
+		int SellerID;
+		string SellerName;
 	public:
-		int getID() { return SellerId; }
-		string getName() { return name; }
-		setName(String tname){name=tname;}
-		setId(int tid){id=tid;}
+		setID(int tid){SellerID=tid;}
+		int getID() { return SellerID; }
+		string getName() { return SellerName; }
+		setName(string tname){SellerName=tname;}
 		
 		//Constructor
 		Seller(int, string);

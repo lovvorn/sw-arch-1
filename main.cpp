@@ -43,7 +43,7 @@ void initItems()
 	itemIndex = 5;
 }
 
-Display(){
+List_Items(){
 	for(int i=0;i<itemIndex;i++)
 	{
 		if(!items[i].isSold())
@@ -57,24 +57,37 @@ Display(){
 
 	}
 }
+void Display_Trans(){
+
+	for(int i=0;i<transactionIndex;i++)
+	{
+		
+		cout<<"Transaction %d information:\n"<<i;
+		cout<<"Transaction Id: "<<transactions[i].getID()<<"\n";
+		cout<<"Seller Id: "<<transactions[i].getSellerID()<<"\n";
+		cout<<"Buyer Id: "<<transactions[i].getBuyerID()<<"\n";
+	
+	}
+}
+
+
+void Add_Buyer(){
+	string bname;
+	int bid;
+	cout<<"Enter buyer name";
+	cin>>bname;
+	buyers[buyerIndex] = new Buyer(buyerIndex, bname);
+	buyerIndex++;
+}
+
 menu(){
 		cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit"
-		
         cin>>choice;
-                        if(choice==1){Display();}
-	}
-        cin>>choice;
-                         if (choice==2) {?();)}
-            
-        cin>>choice;
-                         if (choice==3) {?();)}
-            
-        cin>>choice;
-                         if (choice==4) {?();)}
-                         
-        cin>>choice;
-                         if (choice==5) {?();)}
-                         
-        cin>>choice;
-                         if (choice==6) {?();)}
+        if(choice==1){List_Items();}
+        else if (choice==2) {?();)}
+        else if (choice==3) {Add_Buyer()}
+        else if (choice==4) {?();)}
+        else if (choice==5) {Display_Trans();}
+        else if (choice==6) {?();)}
 
+}
