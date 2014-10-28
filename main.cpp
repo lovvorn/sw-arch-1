@@ -1,5 +1,6 @@
 #include <iostream>
-using namespace std;s
+#include <stdlib.h>
+using namespace std;
 
 #include "Bid.cpp"
 #include "Buyer.cpp"
@@ -45,11 +46,15 @@ void List_Items(){
     {
         if(!items[i].isSold())
         {
-            cout<<"Item %d information:"<<i;
             cout<<"Item Id: "<<items[i].getID()<<"\n";
             cout<<"Item Name: "<<items[i].getName()<<"\n";
-            cout<<"Item highestPrice: "<<items[i].getHighestPrice()<<"\n";
-            cout<<"Item highestBidder: "<<items[i].getHighestBidder()<<"\n";
+			if (items[i].getHighestPrice() > 0)
+			{
+				cout<<"Item highestPrice: "<<items[i].getHighestPrice()<<"\n";
+				cout<<"Item highestBidder: "<<items[i].getHighestBidder()<<"\n";
+			} else {
+				cout<<"This item has not been bidded on.\n";
+			}
         }
 
     }
@@ -59,12 +64,9 @@ void Display_Trans(){
 
     for(int i=0;i<transactionIndex;i++)
     {
-        
-        cout<<"Transaction %d information:\n"<<i;
         cout<<"Transaction Id: "<<transactions[i].getID()<<"\n";
-        cout<<"Seller Id: "<<transactions[i].getSellerID()<<"\n";
-        cout<<"Buyer Id: "<<transactions[i].getBuyerID()<<"\n";
-    
+        cout<<"Seller: "<<sellers[transactions[i].getSellerID()].getName()<<"\n";
+        cout<<"Buyer: "<<buyers[transactions[i].getBuyerID()].getBuyerName()<<"\n";
     }
 }
 
@@ -100,15 +102,33 @@ void End_Bidding()
     cin>>id;
     items[id].setSold(true);
     cout<<"\nItem status has been set to 'sold'\n";
+	
+	int TranID;
+		int SellerID;
+		int BuyerID;
+	transactions[transactionIndex].setData(transactionIndex++, items[id].getSellerID(), items[id].getHighestBidder());
 }
 
-void Bid()
-{
-    cout<<"\nbid\n";
+void Bid() {
+	int BuyerID;
+	int ItemID;
+	double proposed_price;
+	cout<<"What is the ID of the buyer: ";
+	cin>>BuyerID;
+	cout<<"What is the item ID: ";
+	cin>>ItemID;
+	cout<<"What is your bid: $";
+	cin>>proposed_price;
+	
+	bids[bidIndex].setData(bidIndex++, BuyerID, ItemID, proposed_price);
+	if(items[ItemID].getHighestPrice() < proposed_price)
+		items[ItemID].setHighestPrice(proposed_price);
+		items[ItemID].setHighestBidder(BuyerID);
 }
+
 void menu(){
         int choice;
-        cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit\nChoice: ";
+        cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. End Bidding\n7. Exit\nChoice: ";
         cin>>choice;
         if(choice==1){List_Items();}
         else if (choice==2) {Bid();}
@@ -116,11 +136,14 @@ void menu(){
         else if (choice==4) {Add_Item();}
         else if (choice==5) {Display_Trans();}
         else if (choice==6) {End_Bidding();}
+		else if (choice==7) {exit(1);}
 
 }
 
 int main()
 {
+	initItems();
+	initSellers();
     while(1)
     {
         menu();
