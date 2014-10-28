@@ -21,7 +21,10 @@ int bidIndex = 0;
 
 int main()
 {
-	
+	while (1)
+	{
+		menu();
+	}
 }
 void initSellers()
 {
