@@ -51,7 +51,7 @@ void List_Items(){
 			if (items[i].getHighestPrice() > 0)
 			{
 				cout<<"Item highestPrice: "<<items[i].getHighestPrice()<<"\n";
-				cout<<"Item highestBidder: "<<items[i].getHighestBidder()<<"\n";
+				cout<<"Item highestBidder: "<<buyers[items[i].getHighestBidder()].getBuyerName()<<"\n";
 			} else {
 				cout<<"This item has not been bidded on.\n";
 			}
@@ -74,7 +74,7 @@ void Display_Trans(){
 void Add_Buyer(){
     string bname;
     int bid;
-    cout<<"Enter buyer name";
+    cout<<"Enter buyer name: ";
     cin>>bname;
     buyers[buyerIndex].setData(buyerIndex, bname);
     buyerIndex++;
