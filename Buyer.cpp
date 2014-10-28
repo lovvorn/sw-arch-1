@@ -9,5 +9,4 @@ class Buyer {
 		void setName(String tname) {name=tname;} // not sure about it!!
 		
 		Buyer(int id, string name){BuyerID=id; BuyerName=name;}
-}
-
+};

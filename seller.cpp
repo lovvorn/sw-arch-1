@@ -11,4 +11,4 @@ class Seller {
 		//Constructor
 		Seller(int, string);
 		
-}
+};

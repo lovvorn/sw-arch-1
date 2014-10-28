@@ -19,4 +19,4 @@ class Item {
 		
 		//Constructor
 		Item(int, double, int, double, int, string, bool);
-}
+};
