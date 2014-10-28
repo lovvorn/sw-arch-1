@@ -7,5 +7,5 @@ class Bid{
 	public:
 		Bid(int bid, int iid, double price){BuyerID=bid; ItemID=iid; proposed_price=price;}
 		int getID() { return BidID; }
-		setID(int bid){BidID=bid;}
+		void setID(int bid){BidID=bid;}
 }
