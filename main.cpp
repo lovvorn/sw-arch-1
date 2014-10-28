@@ -80,13 +80,27 @@ void Add_Buyer(){
 	buyerIndex++;
 }
 
+void Add_Item(){
+	string iname;
+	double price;
+	int sid;
+	cout<<"Enter the item name: "<<endl;
+	cin>>iname;
+	cout<<"Enter the starting price: "<<endl;
+	cin>>price;
+	cout<<"Enter your seller ID#: "<< endl;
+	cin>>sid;
+	items[itemIndex] = new Item(itemIndex, price, -1, -1, iname, false);
+	itemIndex++;
+}
+
 menu(){
 		cout<<"1. List Items\n2. Bid Items\n3. Add Buyers\n4. Add Item\n5. Display Transaction\n6. Exit"
         cin>>choice;
         if(choice==1){List_Items();}
         else if (choice==2) {?();)}
         else if (choice==3) {Add_Buyer()}
-        else if (choice==4) {?();)}
+        else if (choice==4) {Add_Item();)}
         else if (choice==5) {Display_Trans();}
         else if (choice==6) {?();)}
 
