@@ -184,7 +184,7 @@ void menu()
 			 << "Choice: ";
 		cin  >> choice;
 
-		if (choice == 1)	  { List_Items(); }
+		if (choice == 1)      { List_Items(); }
 		else if (choice == 2) { Bid(); }
 		else if (choice == 3) { Add_Buyer(); }
 		else if (choice == 4) { Add_Item(); }
