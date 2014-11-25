@@ -40,10 +40,14 @@ def show_entry_fields(sym):
    # textPad.insert(INSERT,' Symbol:')
    # textPad.insert(END,test[0][3])
     #textPad.insert(END,' Description:',test[1][1])
-    textPad.insert(END,'Symbol: \t\t\t', END, test[0][3],END,'\nDescription: \t\t\t',END,test[1][1],END,'\nExchange: \t\t\t',END,test[2][1],END,
-      '\nClosing Price: \t\t\t',END,test[4][1],END,'\nDaily Net Change: \t\t\t',END,test[5][1],END,'\nDaily Net Change %: \t\t\t',END,test[6][1],END,
-      '\nVolume: \t\t\t',END,test[7][1],END,'\nAverage Volume: \t\t\t',END,test[8][1],END,'\n52-Week High: \t\t\t',END,test[16][1],END,
-      '\n52-Week Low: \t\t\t',END,test[17][1])
+    try:
+        textPad.insert(END,'Symbol: \t\t\t', END, test[0][3],END,'\nDescription: \t\t\t',END,test[1][1],END,'\nExchange: \t\t\t',END,test[2][1],END,
+          '\nClosing Price: \t\t\t',END,test[4][1],END,'\nDaily Net Change: \t\t\t',END,test[5][1],END,'\nDaily Net Change %: \t\t\t',END,test[6][1],END,
+          '\nVolume: \t\t\t',END,test[7][1],END,'\nAverage Volume: \t\t\t',END,test[8][1],END,'\n52-Week High: \t\t\t',END,test[16][1],END,
+          '\n52-Week Low: \t\t\t',END,test[17][1])
+    except IndexError:
+        textPad.insert(END, "Invalid symbol")
+
     textPad.pack()
 
    
