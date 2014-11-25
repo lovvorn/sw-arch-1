@@ -12,7 +12,6 @@ import http.client
 import re
 
 def show_entry_fields(sym):
-    tkinter.messagebox.showinfo("Messagebox","Thanks for your Query")    
     textPad = tkinter.scrolledtext.ScrolledText(width=60, height=15)
 
 
