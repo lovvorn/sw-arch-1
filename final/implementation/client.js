@@ -82,7 +82,7 @@ $(document).ready(function() {
 
     var attemptLogin = function()
     {
-        var username = loginForm.find("#username");
+        var username = loginForm.find("#username").val();
         loginError.hide();
 
         if (!authenticate(username))
@@ -107,6 +107,7 @@ $(document).ready(function() {
     });
 
     loginButton.on("click", function(e) {
+        e.preventDefault();
         attemptLogin();
     });
 });
