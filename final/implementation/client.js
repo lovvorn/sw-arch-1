@@ -107,7 +107,6 @@ $(document).ready(function() {
     });
 
     loginButton.on("click", function(e) {
-        e.preventDefault();
         attemptLogin();
     });
 });
