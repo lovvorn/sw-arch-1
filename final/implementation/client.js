@@ -1,4 +1,5 @@
 var url = "TEserver.php";
+
 function authenticate(username) {
 	$.ajax({
 		dataType: 'json',
@@ -12,9 +13,9 @@ function authenticate(username) {
 				localStorage['uid'] = rtn.uid;
 				localStorage['name'] = username;
 				window.location.replace("index.html");
-			} else
-				alert('User \'' + $('#username').val() + '\' not found');
-			
+			} else {
+                return false;
+            }
 	});
 }
 
@@ -42,16 +43,22 @@ function searchBySymbol(symbol) {
 }
 
 $(document).ready(function() {
+
+    "use strict";
+
     var splashPage = $("#splash-page");
     var loginForm = $("#login-form");
     var registerForm = $("#register-form");
-    var registerButton = loginForm.find("strong");
-    var loginButton = registerForm.find("strong");
+    var registerPageButton = loginForm.find("strong");
+    var loginPageButton = registerForm.find("strong");
+    var loginButton = loginForm.find("button");
+    var loginError = loginForm.find(".alert");
 
     var showRegisterForm = function()
     {
         loginForm.slideUp("slow", function() {
             loginForm.hide();
+            loginError.hide();
             registerForm.slideDown("slow", function() {
                 registerForm.show()
             });
@@ -68,14 +75,39 @@ $(document).ready(function() {
         });
     }
 
-    registerForm.hide();
+    var showLoginError = function()
+    {
+        loginError.fadeIn("slow");
+    }
 
-    registerButton.on("click", function() {
+    var attemptLogin = function()
+    {
+        var username = loginForm.find("#username");
+        loginError.hide();
+
+        if (!authenticate(username))
+        {
+            showLoginError();
+        }
+        else
+        {
+            window.location.replace('index.html');
+        }
+    }
+
+    registerForm.hide();
+    loginError.hide();
+
+    registerPageButton.on("click", function() {
         showRegisterForm();
     });
 
-    loginButton.on("click", function() {
+    loginPageButton.on("click", function() {
         showLoginForm();
     });
 
+    loginButton.on("click", function(e) {
+        e.preventDefault();
+        attemptLogin();
+    });
 });

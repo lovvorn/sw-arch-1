@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 0;
-    background: url('images/stock-exchange.jpg');
+    background: url('images/busy-street.jpg');
     background-size: cover;
 }
 
@@ -20,6 +20,15 @@ h1.logo {
     font-weight: bold;
     text-shadow: 0em 0em .3em #000, 0em 0em .3em #000, 0em 0em .3em #000;
     color: #fff;
+}
+
+sup {
+    font-size: 16px;
+    font-weight: normal;
+    top: -2em;
+    left: .2em;
+    border-bottom: 1px dotted #fff;
+    cursor: pointer;
 }
 
 .register,
@@ -89,6 +98,15 @@ input[type="email"] {
 .btn {
     border-radius: 3px;
     border: none;
+    background-color: #0078e7;
+    color: #fff;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+    color: #fff;
+    background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.1));
 }
 
 input[type="text"], 
