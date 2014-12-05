@@ -57,6 +57,8 @@ $(document).ready(function() {
     var showRegisterForm = function()
     {
         loginForm.slideUp("slow", function() {
+            loginForm.find("#username").val("");
+            loginForm.find("#password").val("");
             loginForm.hide();
             loginError.hide();
             registerForm.slideDown("slow", function() {
@@ -68,6 +70,9 @@ $(document).ready(function() {
     var showLoginForm = function()
     {
         registerForm.slideUp("slow", function() {
+            registerForm.find("#username").val("");
+            registerForm.find("#email").val("");
+            registerForm.find("#password").val("");
             registerForm.hide();
             loginForm.slideDown("slow", function() {
                 loginForm.show()
