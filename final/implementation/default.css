@@ -1,0 +1,78 @@
+.vertical-center {
+    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    background: url('images/stock-exchange.jpg');
+    background-size: cover;
+}
+
+.login-box {
+    padding: 20px;
+    width: 350px;
+    border-radius: 10px;
+}
+
+h1.logo {
+    font-weight: bold;
+    text-shadow: 0em 0em .3em #000, 0em 0em .3em #000, 0em 0em .3em #000;
+    color: #fff;
+}
+
+.form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    @include box-sizing(border-box);
+}
+
+input[type="text"] {
+    margin-bottom: -1px;
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    box-shadow: none;
+    border-radius: 3px 3px 0px 0px;     
+
+    &:focus {
+        box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);  
+    }
+}
+
+input[type="password"] {
+    z-index: 2;
+    margin-bottom: 20px;
+    border-top: none;
+    border-bottom: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-radius: 0px 0px 3px 3px;   
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+
+    &:focus {
+        box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0px 1px 0px 0px rgba(255,255,255,0.5);     
+    }
+}
+
+.btn {
+    font-weight: bold;
+    border-radius: 3px;
+    border: none;
+}
+
+input[type="text"], textarea {
+    outline: none;
+    box-shadow:none !important;
+    border:1px solid #ccc !important;
+}
+
+.submit-btn {
+    width: 100%;
+}
+
+.btn,
+.btn-primary {
+    border: 0;
+}
