@@ -1,39 +1,42 @@
 <!doctype html>
 <html>
-<head>
+    <head>
+        <title>Log in</title>
+        <meta charset="utf-8">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src='client.js'></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="default.css">
+    </head>
 
-    <title>Log in</title>
+    <body>
 
-    <meta charset="utf-8">
+        <div class="jumbotron vertical-center" id="splash-page">
+            <div class="container form-box">
+                <h1 class="text-center logo">Trade Net</h1>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src='client.js'></script>
+                <form id="login-form" role="form" class="form-login">
+                    <input autofocus="" class="form-control input-lg" type="text" id='username' placeholder="Username" required/>
+                    <input autofocus="" class="form-control input-lg" type="password" id='password' placeholder="Password" disabled/>
+                    <button class="btn btn-primary btn-lg submit-btn" onClick="authenticate($('#username').val());">Log in</button>
+                    <p class="text-center register">
+                        <strong>Sign up</strong> and start trading today!
+                    </p>
+                </form>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="default.css">
+                <form id="register-form" role="form" class="form-login">
+                    <input autofocus="" class="form-control input-lg" type="text" id='username' placeholder="Username" disabled/>
+                    <input autofocus="" class="form-control input-lg" type="email" id='email' placeholder="Email" disabled/>
+                    <input autofocus="" class="form-control input-lg" type="password" id='password' placeholder="Password" disabled/>
+                    <button disabled class="btn btn-primary btn-lg submit-btn" onClick="authenticate($('#username').val());">Sign up</button>
+                    <p class="text-center login">
+                        <strong>Return</strong> to the log in page.
+                    </p>
+               </form>
 
-</head>
-
-<body>
-
-    <div class="jumbotron vertical-center">
-
-        <div class="container login-box">
-
-            <h1 class="text-center logo">Trade Net</h1>
-
-            <form role="form" class="form-login">
-
-                <input autofocus="" class="form-control input-lg" type="text" id='username' placeholder="Username" required/>
-                <input autofocus="" class="form-control input-lg" type="password" id='password' placeholder="Password" disabled/>
-
-                <button class="btn btn-primary btn-lg submit-btn" onClick="authenticate($('#username').val());">Log in</button>
-
-            </form>
-
+            </div>
         </div>
-    </div>
-    
-</body>
+
+    </body>
 </html>

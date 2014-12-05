@@ -41,3 +41,41 @@ function searchBySymbol(symbol) {
 	});
 }
 
+$(document).ready(function() {
+    var splashPage = $("#splash-page");
+    var loginForm = $("#login-form");
+    var registerForm = $("#register-form");
+    var registerButton = loginForm.find("strong");
+    var loginButton = registerForm.find("strong");
+
+    var showRegisterForm = function()
+    {
+        loginForm.slideUp("slow", function() {
+            loginForm.hide();
+            registerForm.slideDown("slow", function() {
+                registerForm.show()
+            });
+        });
+    }
+
+    var showLoginForm = function()
+    {
+        registerForm.slideUp("slow", function() {
+            registerForm.hide();
+            loginForm.slideDown("slow", function() {
+                loginForm.show()
+            });
+        });
+    }
+
+    registerForm.hide();
+
+    registerButton.on("click", function() {
+        showRegisterForm();
+    });
+
+    loginButton.on("click", function() {
+        showLoginForm();
+    });
+
+});
