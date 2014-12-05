@@ -1,6 +1,8 @@
 <?php
 if(!isset($_REQUEST['command']))
 	die('No command set');
+
+header('Content-Type: application/json');
 	
 $sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
 
