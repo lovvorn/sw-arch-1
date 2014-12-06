@@ -100,6 +100,28 @@ $(document).ready(function() {
         }
     }
 
+    var checkLogin = function()
+    {
+        if (typeof localStorage['uid'] === 'undefined'
+            && window.location.href.indexOf("login.html") < 0)
+        {
+            window.location.replace("login.html");
+        }
+        else if (typeof localStorage['uid'] !== 'undefined'
+            && window.location.href.indexOf("index.html") < 0)
+        {
+            window.location.replace("index.html");
+        }
+ 
+        //Place anything you want to happen when the page loads in this function
+        window.onload = function() {
+            $('#user_welcome').html("Welcome, " + localStorage['name']);
+            
+        };
+    }
+
+    checkLogin();
+
     registerForm.hide();
     loginError.hide();
 
@@ -115,4 +137,34 @@ $(document).ready(function() {
         e.preventDefault();
         attemptLogin();
     });
+
+    /*
+     * stuff for the index.html
+     */
+
+    var menuClosed = $("#menu-closed");
+    var menuOpened = $("#menu-opened");
+    var openMenuButton = menuClosed.find("span");
+    var closedMenuButton = menuOpened.find("span");
+
+    var showMenu = function()
+    {
+        menuOpened.animate({left: 0}, 200);
+    }
+
+    var closeMenu = function()
+    {
+        menuOpened.animate({left: "-215px"}, 200);
+    }
+
+    menuOpened.css("left", "-215px");
+
+    openMenuButton.on("mouseover", function() {
+        showMenu();
+    });
+
+    menuOpened.on("mouseleave", function() {
+        closeMenu();
+    });
+
 });

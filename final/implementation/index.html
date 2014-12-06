@@ -1,31 +1,40 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>SW Architecture</title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src='client.js'></script>
-<script>
-//If not logged in (mantained by using localStorage), redirect to login page
-if(typeof localStorage['uid'] === 'undefined')
-	window.location.replace("login.html");
+    <head>
+        <title>Log in</title>
+        <meta charset="utf-8">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src='client.js'></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="default.css">
+    </head>
 
-//Place anything you want to happen when the page loads in this function
-window.onload = function() {
-	$('#user_welcome').html("Welcome, " + localStorage['name']);
-	
-};
+    <body>
 
+        <div id="menu-opened" class="col-md-2 sidebar opened">
+            <p class="text-center">
+                <span id="user_welcome"></span>
+            </p>
+            <button class="btn submit-button btn-lg btn-100" >Buy</button>
+            <button class="btn submit-button btn-lg btn-100" >Sell</button>
+            <button class="btn submit-button btn-lg btn-100" >Logout</button>
+        </div>
 
-</script>
-</head>
+        <div id="menu-closed" class="col-md-2 sidebar closed">
+            <span class="glyth-container">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                <span class="show-menu-text">Show Menu</span>
+            </span>
+        </div>
 
-<body>
-	<h6>[<a href="#" onClick="logout();">Logout</a>]</h6>
-	<h2 id="user_welcome"></h2>
-	<hr />
-	<span>
-		<label>Search by Symbol: <input type="text" id="symbol1" /></label><button onClick="searchBySymbol($('#symbol1').val());">Search</button>
-	</span>
-</body>
+        <div class="col-md-offset-2 content-section">
+            <div class="input-group">
+                <input type="text" style="border-bottom-left-radius: 3px" class="form-control" id="symbol1" placeholder="Enter symbol.  e.g. aapl, goog" required/>
+                <span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+            </div>
+            <!-- <button onClick="searchBySymbol($('#symbol1').val());">Search</button> -->
+        </div>
+
+    </body>
 </html>
