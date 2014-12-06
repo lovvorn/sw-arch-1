@@ -22,6 +22,186 @@ h1.logo {
     color: #fff;
 }
 
+.sidebar {
+    position: fixed;
+    height: 100%;
+    padding: 20px;
+    border-right: 1px solid #eee;
+    background-color: #fff;
+}
+
+.opened {
+    z-index: 10;
+}
+
+.closed {
+    border: 0;
+    text-align: center;
+    margin-top: 20px;
+}
+
+@-ms-keyframes invert {
+    from {
+        background-color: #fff;
+        color: #000;
+    }
+
+    to {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+@-o-keyframes invert {
+    from {
+        background-color: #fff;
+        color: #000;
+    }
+
+    to {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+@-moz-keyframes invert {
+    from {
+        background-color: #fff;
+        color: #000;
+    }
+
+    to {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+@-webkit-keyframes invert {
+    from {
+        background-color: #fff;
+        color: #000;
+    }
+
+    to {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+@keyframes invert {
+    from {
+        background-color: #fff;
+        color: #000;
+    }
+
+    to {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+@-ms-keyframes invert-back {
+    to {
+        background-color: #fff;
+        color: #000;
+    }
+
+    from {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+@-o-keyframes invert-back {
+    to {
+        background-color: #fff;
+        color: #000;
+    }
+
+    from {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+@-moz-keyframes invert-back {
+    to {
+        background-color: #fff;
+        color: #000;
+    }
+
+    from {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+@-webkit-keyframes invert-back {
+    to {
+        background-color: #fff;
+        color: #000;
+    }
+
+    from {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+@keyframes invert-back {
+    to {
+        background-color: #fff;
+        color: #000;
+    }
+
+    from {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+.glyth-container {
+    -webkit-animation: invert-back .2s ease-in both; 
+    -moz-animation: invert-back .2s ease-in both; 
+    -ms-animation: invert-back .2s ease-in both; 
+    -o-animation: invert-back .2s ease-in both; 
+    animation: invert-back .2s ease-in both; 
+    font-weight: bold;
+    background-color: #fff;
+    color: #000;
+    padding: 10px;
+    border: 2px solid #eee;
+    border-radius: 10px; 
+    cursor: pointer;
+}
+
+.btn-100 {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.show-menu-text {
+    margin: 10px;
+}
+
+.logo {
+    margin-bottom: 30px;
+}
+
+.glyth-container:hover {
+    -webkit-animation: invert .2s ease-in-out both; 
+    -moz-animation: invert .2s ease-in-out both; 
+    -ms-animation: invert .2s ease-in-out both; 
+    -o-animation: invert .2s ease-in-out both; 
+    animation: invert .2s ease-in-out both; 
+}
+
+.content-section {
+    width: 500px;
+    padding: 20px;
+    padding-top: 28px;
+}
+
 sup {
     font-size: 16px;
     font-weight: normal;

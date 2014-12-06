@@ -2,7 +2,7 @@
 if(!isset($_REQUEST['command']))
 	die('No command set');
 	
-$sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
+$sql = new MySQLi('localhost', 'dev', 'dev', 'test');
 
 switch($_REQUEST['command'])
 {
