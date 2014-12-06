@@ -12,28 +12,52 @@
 
     <body>
 
+        <div class="cover"></div>
+
+        <div class="buy-sell" id="buy-window">
+            Buy
+        </div>
+
+        <div class="buy-sell" id="sell-window">
+            sell
+        </div>
+
         <div id="menu-opened" class="col-md-2 sidebar opened">
+            <p id="lock-menu" class="glyth-container text-center">
+                <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                <span class="show-menu-text">Lock Menu</span>
+            </p>
             <p class="text-center">
                 <span id="user_welcome"></span>
             </p>
-            <button class="btn submit-button btn-lg btn-100" >Buy</button>
-            <button class="btn submit-button btn-lg btn-100" >Sell</button>
-            <button class="btn submit-button btn-lg btn-100" >Logout</button>
+            <button id="buy" class="btn submit-button btn-lg btn-100" >Buy</button>
+            <button id="sell" class="btn submit-button btn-lg btn-100" >Sell</button>
+            <button id="logout" class="btn submit-button btn-lg btn-100" >Logout</button>
         </div>
 
         <div id="menu-closed" class="col-md-2 sidebar closed">
-            <span class="glyth-container">
+            <span class="glyth-container text-center">
                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                 <span class="show-menu-text">Show Menu</span>
             </span>
         </div>
 
         <div class="col-md-offset-2 content-section">
+
             <div class="input-group">
                 <input type="text" style="border-bottom-left-radius: 3px" class="form-control" id="symbol1" placeholder="Enter symbol.  e.g. aapl, goog" required/>
                 <span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
             </div>
-            <!-- <button onClick="searchBySymbol($('#symbol1').val());">Search</button> -->
+
+            <div id="content">
+                <div class="loading text-center">
+                    <img src="images/loading.gif" />
+                </div>
+                <div class="stock-info">
+                    test
+                </div>
+            </div>
+
         </div>
 
     </body>

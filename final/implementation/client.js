@@ -25,7 +25,8 @@ function logout() {
 	window.location.replace('index.html');
 }
 
-function searchBySymbol(symbol) {
+function searchBySymbol(symbol, callback) {
+
 	$.ajax({
 		dataType: 'json',
 		type: "POST",
@@ -35,11 +36,14 @@ function searchBySymbol(symbol) {
 		.done(function( rtn ) {
 			if(typeof rtn.error == 'undefined')
 			{
-				alert('Company: ' + rtn.quotes.quote.description);
-			} else
-				alert('Error');
-			
+				//alert('Company: ' + rtn.quotes.quote.description);
+                callback(rtn);
+			} else {
+                return false;
+            }
+
 	});
+
 }
 
 $(document).ready(function() {
@@ -142,10 +146,25 @@ $(document).ready(function() {
      * stuff for the index.html
      */
 
+    var lockMenu = false;
+
+    var cover = $(".cover");
     var menuClosed = $("#menu-closed");
     var menuOpened = $("#menu-opened");
+    var searchButton = $("#search");
+    var logoutButton = $("#logout");
+    var contentArea = $("#content");
+    var lockMenuButton = $("#lock-menu");
+    var searchBar = $("#symbol1");
+    var buyButton = $("#buy");
+    var sellButton = $("#sell");
+    var loading = contentArea.find(".loading");
+    var stockInfoArea = contentArea.find(".stock-info");
     var openMenuButton = menuClosed.find("span");
     var closedMenuButton = menuOpened.find("span");
+
+    var buyWindow = $("#buy-window");
+    var sellWindow = $("#sell-window");
 
     var showMenu = function()
     {
@@ -158,6 +177,12 @@ $(document).ready(function() {
     }
 
     menuOpened.css("left", "-215px");
+    contentArea.hide();
+    stockInfoArea.hide();
+    loading.hide();
+    cover.hide();
+    buyWindow.hide();
+    sellWindow.hide();
 
     openMenuButton.on("mouseover", function() {
         showMenu();
@@ -166,5 +191,70 @@ $(document).ready(function() {
     menuOpened.on("mouseleave", function() {
         closeMenu();
     });
+
+    searchBar.bind("enterKey", function() {
+
+    });
+
+    searchBar.keyup(function(e) {
+        if (e.keyCode == 13)
+        {
+            $(this).trigger("enterKey");
+        }
+    });
+
+    searchButton.on("click", function() {
+        contentArea.show();
+        loading.show();
+        searchBySymbol($('#symbol1').val(), function(rtn) {
+            loading.hide();
+            stockInfoArea.show();
+            stockInfoArea.html(rtn.quotes.quote.description);
+        });
+    });
+
+    logoutButton.on("click", function() {
+        logout();
+    });
+
+    lockMenuButton.on("click", function() {
+        lockMenu = !lockMenu;
+        if (lockMenu)
+        {
+            lockMenuButton.find(".show-menu-text").html("Unlock Menu");
+            menuOpened.unbind("mouseleave");
+        }
+        else
+        {
+            lockMenuButton.find(".show-menu-text").html("Lock Menu");
+            menuOpened.on("mouseleave", function() {
+                closeMenu();
+            });
+        }
+    });
+
+    buyButton.on("click", function() {
+        cover.fadeIn();
+        buyWindow.show();
+        buyWindow.animate({top: "20%"});
+    });
+
+    sellButton.on("click", function() {
+        cover.fadeIn();
+        sellWindow.show();
+        sellWindow.animate({top: "20%"});
+    });
+
+    cover.on("click", function() {
+        buyWindow.animate({top: "-1000px"}, function() {
+            buyWindow.hide();
+            cover.fadeOut();
+        });
+        sellWindow.animate({top: "-1000px"}, function() {
+            sellWindow.hide();
+            cover.fadeOut();
+        });
+    });
+
 
 });
