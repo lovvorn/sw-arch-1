@@ -8,10 +8,14 @@
     background-size: cover;
 }
 
-.loading {
+.loading{
     top: 50%;
     width: 100%;
     padding: 50px;
+}
+
+.stock-info {
+    padding-top: 10px;
 }
 
 .loading > img {

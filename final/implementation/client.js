@@ -39,6 +39,7 @@ function searchBySymbol(symbol, callback) {
 				//alert('Company: ' + rtn.quotes.quote.description);
                 callback(rtn);
 			} else {
+                callback(false);
                 return false;
             }
 
@@ -173,16 +174,18 @@ $(document).ready(function() {
 
     var closeMenu = function()
     {
-        menuOpened.animate({left: "-215px"}, 200);
+        menuOpened.animate({left: "-1000px"}, 200);
     }
 
-    menuOpened.css("left", "-215px");
+    menuOpened.css("left", "-1000px");
     contentArea.hide();
     stockInfoArea.hide();
     loading.hide();
     cover.hide();
     buyWindow.hide();
     sellWindow.hide();
+    stockInfoArea.find("error").hide();
+    searchBar.focus();
 
     openMenuButton.on("mouseover", function() {
         showMenu();
@@ -193,7 +196,7 @@ $(document).ready(function() {
     });
 
     searchBar.bind("enterKey", function() {
-
+        searchButton.click();
     });
 
     searchBar.keyup(function(e) {
@@ -204,12 +207,39 @@ $(document).ready(function() {
     });
 
     searchButton.on("click", function() {
+
+        stockInfoArea.find("#error").hide();
+        stockInfoArea.find("table").hide(); 
+        stockInfoArea.find("h1").hide();
+        stockInfoArea.find("h2").hide();
         contentArea.show();
         loading.show();
+
+        if (!($('#symbol1').val()))
+        {
+            loading.hide();
+            stockInfoArea.show();
+            stockInfoArea.find("#error").fadeIn();
+            return;
+        }
+
         searchBySymbol($('#symbol1').val(), function(rtn) {
             loading.hide();
             stockInfoArea.show();
-            stockInfoArea.html(rtn.quotes.quote.description);
+            if (!rtn)
+            {
+                stockInfoArea.find("#error").fadeIn();
+            }
+            else
+            {
+                stockInfoArea.find("h1").fadeIn();
+                stockInfoArea.find("h2").fadeIn();
+                stockInfoArea.find("table").fadeIn();
+            }
+            //stockInfoArea.html(rtn.quotes.quote.description);
+            
+            searchBar.val("");
+            searchBar.focus();
         });
     });
 
