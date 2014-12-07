@@ -211,7 +211,7 @@ $(document).ready(function() {
         stockInfoArea.find("#error").hide();
         stockInfoArea.find("table").hide(); 
         stockInfoArea.find("h1").hide();
-        stockInfoArea.find("h2").hide();
+        stockInfoArea.find("h3").hide();
         contentArea.show();
         loading.show();
 
@@ -232,8 +232,8 @@ $(document).ready(function() {
             }
             else
             {
-                stockInfoArea.find("h1").fadeIn();
-                stockInfoArea.find("h2").fadeIn();
+                stockInfoArea.find("h1").html(rtn.quotes.quote.description).fadeIn();
+                stockInfoArea.find("h3").html(rtn.quotes.quote.symbol).fadeIn();
                 stockInfoArea.find("table").fadeIn();
             }
             //stockInfoArea.html(rtn.quotes.quote.description);
