@@ -28,6 +28,9 @@ switch($_REQUEST['command'])
 		else
 			echo $rtn;
 		break;
+	case 'buyStock':
+	
+		break;
 }
 
 $sql->close();
