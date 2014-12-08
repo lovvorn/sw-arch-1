@@ -203,6 +203,7 @@ $(document).ready(function() {
         if (e.keyCode == 13)
         {
             $(this).trigger("enterKey");
+            e.Handled = true;
         }
     });
 
@@ -234,6 +235,14 @@ $(document).ready(function() {
             {
                 stockInfoArea.find("h1").html(rtn.quotes.quote.description).fadeIn();
                 stockInfoArea.find("h3").html(rtn.quotes.quote.symbol).fadeIn();
+                stockInfoArea.find("#exchange-cell").html(rtn.quotes.quote.exch);
+                stockInfoArea.find("#closing-price-cell").html(rtn.quotes.quote.close);
+                stockInfoArea.find("#daily-net-change-cell").html(rtn.quotes.quote.change);
+                stockInfoArea.find("#percentage-cell").html(rtn.quotes.quote.change_percentage);
+                stockInfoArea.find("#volume-cell").html(rtn.quotes.quote.volume);
+                stockInfoArea.find("#avg-volume-cell").html(rtn.quotes.quote.average_volume);
+                stockInfoArea.find("#high-cell").html(rtn.quotes.quote.high);
+                stockInfoArea.find("#low-cell").html(rtn.quotes.quote.low);
                 stockInfoArea.find("table").fadeIn();
             }
             //stockInfoArea.html(rtn.quotes.quote.description);
