@@ -289,7 +289,7 @@ $(document).ready(function() {
 	
 	buyNumStock.on('change', function() {
 
-		var price = buyCurrentPriceHidden.val()*buyNumStock.val();
+		var price = parseFloat(buyCurrentPriceHidden.val()*buyNumStock.val()).toFixed(2);
 		buyTotal.html('Total: $'+(price));
 
 		$.ajax({

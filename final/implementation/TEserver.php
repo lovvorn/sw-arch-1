@@ -4,8 +4,8 @@ if(!isset($_REQUEST['command']))
 
 header('Content-Type: application/json');
 	
-$sql = new MySQLi('localhost', 'dev', 'dev', 'test');
-//$sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
+#$sql = new MySQLi('localhost', 'dev', 'dev', 'test');
+$sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
 
 switch($_REQUEST['command'])
 {
@@ -44,7 +44,7 @@ switch($_REQUEST['command'])
 		$symbol = strtoupper($_REQUEST['symbol']);
 		$amount = $_REQUEST['amount'];
 		$price = $_REQUEST['price'];
-		$total = $amount*$price;
+		$total = round($amount*$price, 2);
 		$now = date('Y-m-d H:i:s');
 		
 		$afford = canIAfford($user, $total);
