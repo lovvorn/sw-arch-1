@@ -255,8 +255,16 @@ $(document).ready(function() {
 			if(typeof rtn.error == 'undefined')
 			{
 				if(rtn.success)
+				{
 					alert('Successfull purchase.');
-				else
+					buySymbol.val('');
+					buyCurrentPriceVisible.html('');
+					buyCurrentPriceHidden.val('');
+					buyTotal.html('');
+					buyNumStock.val('1');
+    				buyWindow.hide();
+            		cover.fadeOut();
+				} else
 					alert('Purchase failed.');
 			} 
 		});
