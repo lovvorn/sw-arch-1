@@ -259,8 +259,10 @@ $(document).ready(function() {
 	});
 	
 	buyNumStock.on('change', function() {
+
 		var price = buyCurrentPriceHidden.val()*buyNumStock.val();
 		buyTotal.html('Total: $'+(price));
+
 		$.ajax({
 					dataType: 'json',
 					type: "POST",
@@ -269,6 +271,7 @@ $(document).ready(function() {
 					data: { command: "canIAfford", user: localStorage['uid'], price: price }
 				})
 				.done(function(rtn) {
+
 					if(typeof rtn.error == 'undefined')
 					{
 						if (rtn.afford)
@@ -280,6 +283,7 @@ $(document).ready(function() {
 							buyTotal.removeClass('text-success');
 						}
 					} 
+
 				});
 	});
 
@@ -357,10 +361,27 @@ $(document).ready(function() {
         buyWindow.animate({top: "20%"});
     });
 
-    sellButton.on("click", function() {
+    sellButton.on("click", function(e, symbol, shares) {
+
+        if (portfolioButton.html() == "Portfolio")
+        {
+            portfolioButton.trigger("click");
+            return;
+        }
+
         cover.fadeIn();
+
+        sellWindow.children("h3").html("Selling " + symbol);
+        sellWindow.children("span").html("You have <strong><em>" + shares + "</em></strong> share(s) to sell.");
         sellWindow.show();
         sellWindow.animate({top: "20%"});
+    });
+
+    $("#portfolio-content > table > tbody").on("click", ".sell-stock", function(e) {
+        var symbol = $(this).parent().children("td").eq(1).html();
+        var shares = $(this).parent().children("td").eq(2).html();
+
+        sellButton.trigger("click", [symbol, shares]);
     });
 
     portfolioButton.on("click", function() {
@@ -368,11 +389,11 @@ $(document).ready(function() {
         {
             $("#portfolio-content > table").children("tbody").html("");
             getPortfolio(localStorage['name'], function(rtn) {
-
                 var result = "";
                 for (var i = 0; i < rtn.length; i++)
                 {
                     result += "<tr>";
+                    result += "<td class=\"sell-stock\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></td>";
                     result += "<td>" + rtn[i][1] + "</td>";
                     result += "<td>" + rtn[i][2] + "</td>";
                     result += "<td>" + rtn[i][3] + "</td>";
