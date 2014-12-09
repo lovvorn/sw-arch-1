@@ -4,8 +4,8 @@ if(!isset($_REQUEST['command']))
 
 header('Content-Type: application/json');
 	
-$sql = new MySQLi('localhost', 'dev', 'dev', 'test');
-//$sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
+#$sql = new MySQLi('localhost', 'dev', 'dev', 'test');
+$sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
 
 switch($_REQUEST['command'])
 {
@@ -28,8 +28,12 @@ switch($_REQUEST['command'])
 		else
 			echo $rtn;
 		break;
+	case 'getStockPrice':
+		echo getCurrentPrice($_REQUEST['symbol']);
+		#echo json_encode(array('test' => 'stockPrice: '.$_REQUEST['symbol']));
+		break;
 	case 'buyStock':
-	
+		echo json_encode(array('test' => 'buyStock'));
 		break;
 }
 
@@ -41,7 +45,14 @@ $sql->close();
 # The Pluto admin does not have PHP's native curl functions enabled. This function uses the command-line cURL and returns the result
 function getCurl($url, $json = true) # json, return json. !json, return assoc. array
 {
-	exec("curl -H \"Accept: application/json\" -H \"Authorization: Bearer wh9CdQDwJTr6hDrXQuqrKzP0Ayy3\" {$url}", $rtn);
+	exec("curl -H \"Accept: application/json\" -H \"Authorization: Bearer wh9CdQDwJTr6hDrXQuqrKzP0Ayy3\" \"{$url}\"", $rtn);
 	return ($json ? $rtn[0] : json_decode($rtn[0], true));
+}
+
+# Not the current price
+function getCurrentPrice($symbol)
+{
+	$data = getCurl("https://sandbox.tradier.com/v1/markets/history?symbol={$symbol}&interval=daily&start=2014-12-05&end=2014-12-06", false);
+	return $data['history']['day']['close'];
 }
 ?>
