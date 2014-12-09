@@ -157,6 +157,8 @@ $(document).ready(function() {
     var contentArea = $("#content");
     var lockMenuButton = $("#lock-menu");
     var searchBar = $("#symbol1");
+
+    var portfolioButton = $("#portfolio");
     var buyButton = $("#buy");
     var sellButton = $("#sell");
     var loading = contentArea.find(".loading");
@@ -187,6 +189,8 @@ $(document).ready(function() {
     stockInfoArea.find("error").hide();
     searchBar.focus();
 
+    $("#portfolio-content").hide().animate({"margin-top": "-1000px"});
+
     openMenuButton.on("mouseover", function() {
         showMenu();
     });
@@ -203,7 +207,6 @@ $(document).ready(function() {
         if (e.keyCode == 13)
         {
             $(this).trigger("enterKey");
-            e.Handled = true;
         }
     });
 
@@ -272,6 +275,9 @@ $(document).ready(function() {
         }
     });
 
+    openMenuButton.trigger("mouseover");
+    lockMenuButton.trigger("click");
+
     buyButton.on("click", function() {
         cover.fadeIn();
         buyWindow.show();
@@ -282,6 +288,25 @@ $(document).ready(function() {
         cover.fadeIn();
         sellWindow.show();
         sellWindow.animate({top: "20%"});
+    });
+
+    portfolioButton.on("click", function() {
+        if ($(this).html() == "Portfolio")
+        {
+            $("#search-content").animate({"margin-top": "-1000px"}, function() {
+                $(this).hide(); 
+                portfolioButton.html("Search");
+                $("#portfolio-content").show().animate({"margin-top": "0"})
+            });
+        }
+        else if ($(this).html() == "Search")
+        {
+            $("#portfolio-content").animate({"margin-top": "-1000px"}, function() {
+                $(this).hide(); 
+                portfolioButton.html("Portfolio");
+                $("#search-content").show().animate({"margin-top": "0"})
+            });
+        }
     });
 
     cover.on("click", function() {

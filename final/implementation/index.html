@@ -32,6 +32,7 @@
             </p>
             <button id="buy" class="btn submit-button btn-lg btn-100" >Buy</button>
             <button id="sell" class="btn submit-button btn-lg btn-100" >Sell</button>
+            <button id="portfolio" class="btn submit-button btn-lg btn-100" >Portfolio</button>
             <button id="logout" class="btn submit-button btn-lg btn-100" >Logout</button>
         </div>
 
@@ -44,70 +45,79 @@
 
         <div class="col-md-offset-2 content-section">
 
-            <div class="input-group">
-                <input type="text" style="border-bottom-left-radius: 3px" class="form-control" id="symbol1" placeholder="Enter symbol.  e.g. aapl, goog" required/>
-                <span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+            <div id="portfolio-content">
+                <h1>Portfolio</h1>
             </div>
 
-            <div id="content">
-                <div class="loading text-center">
-                    <img src="images/loading.gif" />
+
+            <div id="search-content">
+
+                <div class="input-group">
+                    <input type="text" style="border-bottom-left-radius: 3px" class="form-control" id="symbol1" placeholder="Enter symbol.  e.g. aapl, goog" required/>
+                    <span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
                 </div>
-                <div class="stock-info">
 
-                    <div id="error" class="alert alert-danger">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                        There is no company with that symbol.
+                <div id="content">
+                    <div class="loading text-center">
+                        <img src="images/loading.gif" />
                     </div>
+                    <div class="stock-info">
 
-                    <h1>Company Name</h1>
-                    <h3>Company Symbol</h3>
+                        <div id="error" class="alert alert-danger">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            There is no company with that symbol.
+                        </div>
 
-                    <table class="table table-striped">
-                        <tbody>
+                        <h1>Company Name</h1>
+                        <h3>Company Symbol</h3>
 
-                            <tr>
-                                <td>Exchange</td>
-                                <td id="exchange-cell"></td>
-                            </tr>
+                        <table class="table table-striped">
+                            <tbody>
 
-                            <tr>
-                                <td>Closing Price</td>
-                                <td id="closing-price-cell"></td>
-                            </tr>
+                                <tr>
+                                    <td>Exchange</td>
+                                    <td id="exchange-cell"></td>
+                                </tr>
 
-                            <tr>
-                                <td>Daily Net Change</td>
-                                <td id="daily-net-change-cell"></td>
-                            </tr>
+                                <tr>
+                                    <td>Closing Price</td>
+                                    <td id="closing-price-cell"></td>
+                                </tr>
 
-                            <tr>
-                                <td>Daily Net Change Percentage</td>
-                                <td id="percentage-cell"></td>
-                            </tr>
+                                <tr>
+                                    <td>Daily Net Change</td>
+                                    <td id="daily-net-change-cell"></td>
+                                </tr>
 
-                            <tr>
-                                <td>Volume</td>
-                                <td id="volume-cell"></td>
-                            </tr>
+                                <tr>
+                                    <td>Daily Net Change Percentage</td>
+                                    <td id="percentage-cell"></td>
+                                </tr>
 
-                            <tr>
-                                <td>Average Volume</td>
-                                <td id="avg-volume-cell"></td>
-                            </tr>
+                                <tr>
+                                    <td>Volume</td>
+                                    <td id="volume-cell"></td>
+                                </tr>
 
-                            <tr>
-                                <td>High</td>
-                                <td id="high-cell"></td>
-                            </tr>
+                                <tr>
+                                    <td>Average Volume</td>
+                                    <td id="avg-volume-cell"></td>
+                                </tr>
 
-                            <tr>
-                                <td>Low</td>
-                                <td id="low-cell"></td>
-                            </tr>
+                                <tr>
+                                    <td>High</td>
+                                    <td id="high-cell"></td>
+                                </tr>
 
-                        </tbody>
-                    </table>
+                                <tr>
+                                    <td>Low</td>
+                                    <td id="low-cell"></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
 
                 </div>
             </div>
