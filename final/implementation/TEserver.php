@@ -29,7 +29,7 @@ switch($_REQUEST['command'])
 			echo $rtn;
 		break;
 	case 'getStockPrice':
-		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'])));
+		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'], 'buy')));
 		break;
 	case 'canIAfford':
 		$user = $_REQUEST['user'];
@@ -91,9 +91,12 @@ function getCurl($url, $json = true) # json, return json. !json, return assoc. a
 }
 
 # Not the current price
-function getCurrentPrice($symbol)
+function getCurrentPrice($symbol, $buysell)
 {
-	$data = getCurl("https://sandbox.tradier.com/v1/markets/history?symbol={$symbol}&interval=daily&start=2014-12-05&end=2014-12-06", false);
+	if($buysell == 'sell')
+		$data = getCurl("https://sandbox.tradier.com/v1/markets/history?symbol={$symbol}&interval=daily&start=2014-12-05&end=2014-12-06", false);
+	else
+		$data = getCurl("https://sandbox.tradier.com/v1/markets/history?symbol={$symbol}&interval=daily&start=2014-11-05&end=2014-11-06", false);
 	return $data['history']['day']['close'];
 }
 
