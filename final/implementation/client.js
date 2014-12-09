@@ -209,6 +209,7 @@ $(document).ready(function() {
     stockInfoArea.find("error").hide();
     searchBar.focus();
 
+    $("#portfolio-content").children("#error").hide();
     $("#portfolio-content").hide().animate({"margin-top": "-1000px"});
 
     openMenuButton.on("mouseover", function() {
@@ -388,6 +389,11 @@ $(document).ready(function() {
         if (portfolioButton.html() == "Portfolio")
         {
             portfolioButton.trigger("click");
+        }
+
+        if (typeof symbol === 'undefined' || typeof shares === 'undefined')
+        {
+            $("#portfolio-content").children('#error').fadeIn();
             return;
         }
 
@@ -407,6 +413,9 @@ $(document).ready(function() {
     });
 
     portfolioButton.on("click", function() {
+
+        $("#portfolio-content").children("#error").hide();
+
         if ($(this).html() == "Portfolio")
         {
             $("#portfolio-content > table").children("tbody").html("");
