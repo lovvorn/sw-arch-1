@@ -31,6 +31,17 @@ switch($_REQUEST['command'])
 	case 'getStockPrice':
 		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'])));
 		break;
+	case 'canIAfford':
+		$user = $_REQUEST['user'];
+		$price = $_REQUEST['price'];
+		
+		$q = $sql->query("SELECT `balance` FROM `Customer` WHERE id = '{$user}';"); 
+		$result = $q->fetch_assoc();
+		
+		$afford = ($result['balance'] > $price ? true : false);
+		
+		echo json_encode(array('afford' => $afford));
+		break;
 	case 'buyStock':
 		echo json_encode(array('test' => 'buyStock'));
 		break;

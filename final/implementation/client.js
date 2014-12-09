@@ -248,7 +248,28 @@ $(document).ready(function() {
 	});
 	
 	buyNumStock.on('change', function() {
-		buyTotal.html('Total: $'+(buyCurrentPriceHidden.val()*buyNumStock.val()));
+		var price = buyCurrentPriceHidden.val()*buyNumStock.val();
+		buyTotal.html('Total: $'+(price));
+		$.ajax({
+					dataType: 'json',
+					type: "POST",
+					url: url,
+					async: false,
+					data: { command: "canIAfford", user: localStorage['uid'], price: price }
+				})
+				.done(function(rtn) {
+					if(typeof rtn.error == 'undefined')
+					{
+						if (rtn.afford)
+						{
+							buyTotal.addClass('text-success');
+							buyTotal.removeClass('text-danger');
+						} else {
+							buyTotal.addClass('text-danger');
+							buyTotal.removeClass('text-success');
+						}
+					} 
+				});
 	});
 
     searchButton.on("click", function() {
