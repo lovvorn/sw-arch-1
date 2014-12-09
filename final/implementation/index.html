@@ -14,8 +14,7 @@
 
         <div class="cover"></div>
 
-        <div class="buy-sell" id="buy-window">
-
+        <div class="buy-sell" id="buy-window" style="height:350px;">
             <div class="input-group">
                 <input type="text" style="border-bottom-left-radius: 3px" class="form-control" id="symbol_buy" placeholder="Enter symbol.  e.g. aapl, goog" required/>
                 <span class="input-group-addon" id="search_buy"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
@@ -23,10 +22,10 @@
 			<div id="buy_container">
 				<div class="h3" id="buy_current_price_visible"></div>
 				<input type="hidden" id="buy_current_price" />
-				<label>Number of Stock: <input type="number" class="form-control" id='buy_num_stock' required /></label>
+				<label>Number of Stock: <input type="number" required class="form-control" id='buy_num_stock' min="1" step="1" value="1" /></label>
 				<div class="h2" id="buy_total"></div>
+				<button type="button" class="btn btn-default" id="buyStock">Buy</button>
 			</div>
-
         </div>
 
         <div class="buy-sell" id="sell-window">
@@ -58,20 +57,6 @@
 
             <div id="portfolio-content">
                 <h1>Portfolio</h1>
-
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Stock</th>
-                            <th>Shares</th>
-                            <th>Purchase Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-
             </div>
 
 

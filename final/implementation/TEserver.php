@@ -35,15 +35,28 @@ switch($_REQUEST['command'])
 		$user = $_REQUEST['user'];
 		$price = $_REQUEST['price'];
 		
-		$q = $sql->query("SELECT `balance` FROM `Customer` WHERE id = '{$user}';"); 
-		$result = $q->fetch_assoc();
-		
-		$afford = ($result['balance'] > $price ? true : false);
+		$afford = canIAfford($user, $price);
 		
 		echo json_encode(array('afford' => $afford));
 		break;
-	case 'buyStock':
-		echo json_encode(array('test' => 'buyStock'));
+	case 'buy':
+		$user = $_REQUEST['user'];
+		$symbol = strtoupper($_REQUEST['symbol']);
+		$amount = $_REQUEST['amount'];
+		$price = $_REQUEST['price'];
+		$total = $amount*$price;
+		$now = date('Y-m-d H:i:s');
+		
+		$afford = canIAfford($user, $total);
+		
+		if ($afford)
+		{
+			$q = $sql->query("INSERT INTO `Portfolio` VALUES ('{$user}', '{$symbol}', '{$amount}', '{$total}');");
+			$q = $sql->query("INSERT INTO `Transactions` VALUES ('{$user}', '{$symbol}', '{$amount}', '{$now}');");
+			$q = $sql->query("UPDATE `Customer` SET `balance` = `balance` - '{$total}' WHERE `id` = '{$user}';");
+		}
+		
+		echo json_encode(array('success' => $afford));
 		break;
     case 'getPortfolio':
 
@@ -76,5 +89,14 @@ function getCurrentPrice($symbol)
 {
 	$data = getCurl("https://sandbox.tradier.com/v1/markets/history?symbol={$symbol}&interval=daily&start=2014-12-05&end=2014-12-06", false);
 	return $data['history']['day']['close'];
+}
+
+function canIAfford($user, $price)
+{
+	global $sql;
+	
+	$q = $sql->query("SELECT `balance` FROM `Customer` WHERE id = '{$user}';"); 
+	$result = $q->fetch_assoc();
+	return ($result['balance'] > $price ? true : false);
 }
 ?>

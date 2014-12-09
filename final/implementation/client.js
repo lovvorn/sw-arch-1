@@ -180,6 +180,7 @@ $(document).ready(function() {
 	var buyTotal = $('#buy_total');
 	var buyCurrentPriceVisible = $('#buy_current_price_visible');
 	var buyCurrentPriceHidden = $('#buy_current_price');
+	var buyStock = $('#buyStock');
     var loading = contentArea.find(".loading");
     var stockInfoArea = contentArea.find(".stock-info");
     var openMenuButton = menuClosed.find("span");
@@ -241,6 +242,25 @@ $(document).ready(function() {
         }
     });
 	
+	buyStock.on('click', function() {
+		$.ajax({
+			dataType: 'json',
+			type: "POST",
+			url: url,
+			async: false,
+			data: { command: "buy", symbol: buySymbol.val(), amount: buyNumStock.val(), user: localStorage['uid'], price: buyCurrentPriceHidden.val() }
+		})
+		.done(function(rtn) {
+			if(typeof rtn.error == 'undefined')
+			{
+				if(rtn.success)
+					alert('Successfull purchase.');
+				else
+					alert('Purchase failed.');
+			} 
+		});
+	});
+	
 	buySearchButton.on('click', function() {
 		$.ajax({
 			dataType: 'json',
@@ -275,9 +295,11 @@ $(document).ready(function() {
 						{
 							buyTotal.addClass('text-success');
 							buyTotal.removeClass('text-danger');
+							buyStock.removeAttr("disabled");
 						} else {
 							buyTotal.addClass('text-danger');
 							buyTotal.removeClass('text-success');
+							buyStock.attr('disabled', 'disabled');
 						}
 					} 
 				});
