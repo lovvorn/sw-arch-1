@@ -58,6 +58,7 @@ $(document).ready(function() {
     var loginPageButton = registerForm.find("strong");
     var loginButton = loginForm.find("button");
     var loginError = loginForm.find(".alert");
+	var buyContainer = $('#buy_container');
 
     var showRegisterForm = function()
     {
@@ -129,6 +130,7 @@ $(document).ready(function() {
 
     registerForm.hide();
     loginError.hide();
+	buyContainer.hide();
 
     registerPageButton.on("click", function() {
         showRegisterForm();
@@ -163,6 +165,10 @@ $(document).ready(function() {
     var sellButton = $("#sell");
 	var buySearchButton = $('#search_buy');
 	var buySymbol = $('#symbol_buy');
+	var buyNumStock = $('#buy_num_stock');
+	var buyTotal = $('#buy_total');
+	var buyCurrentPriceVisible = $('#buy_current_price_visible');
+	var buyCurrentPriceHidden = $('#buy_current_price');
     var loading = contentArea.find(".loading");
     var stockInfoArea = contentArea.find(".stock-info");
     var openMenuButton = menuClosed.find("span");
@@ -234,9 +240,15 @@ $(document).ready(function() {
 		.done(function(rtn) {
 			if(typeof rtn.error == 'undefined')
 			{
-				alert(rtn.test);
+				buyCurrentPriceVisible.html('Current Price: $'+rtn.price);
+				buyCurrentPriceHidden.val(rtn.price);
+				buyContainer.show();
 			} 
 		});
+	});
+	
+	buyNumStock.on('change', function() {
+		buyTotal.html('Total: $'+(buyCurrentPriceHidden.val()*buyNumStock.val()));
 	});
 
     searchButton.on("click", function() {

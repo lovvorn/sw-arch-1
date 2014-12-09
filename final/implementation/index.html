@@ -19,6 +19,12 @@
                 <input type="text" style="border-bottom-left-radius: 3px" class="form-control" id="symbol_buy" placeholder="Enter symbol.  e.g. aapl, goog" required/>
                 <span class="input-group-addon" id="search_buy"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
             </div>
+			<div id="buy_container">
+				<div class="h3" id="buy_current_price_visible"></div>
+				<input type="hidden" id="buy_current_price" />
+				<label>Number of Stock: <input type="number" class="form-control" id='buy_num_stock' required /></label>
+				<div class="h2 text-success" id="buy_total"></div>
+			</div>
         </div>
 
         <div class="buy-sell" id="sell-window">

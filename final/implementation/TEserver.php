@@ -29,8 +29,7 @@ switch($_REQUEST['command'])
 			echo $rtn;
 		break;
 	case 'getStockPrice':
-		echo getCurrentPrice($_REQUEST['symbol']);
-		#echo json_encode(array('test' => 'stockPrice: '.$_REQUEST['symbol']));
+		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'])));
 		break;
 	case 'buyStock':
 		echo json_encode(array('test' => 'buyStock'));
