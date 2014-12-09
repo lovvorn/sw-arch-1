@@ -14,6 +14,15 @@
     padding: 50px;
 }
 
+.sell-stock {
+    text-align: center;
+}
+
+.sell-stock:hover {
+    cursor: pointer;
+    color: #0078e7;
+}
+
 .stock-info {
     padding-top: 10px;
 }
