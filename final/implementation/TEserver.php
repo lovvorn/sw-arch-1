@@ -45,6 +45,18 @@ switch($_REQUEST['command'])
 	case 'buyStock':
 		echo json_encode(array('test' => 'buyStock'));
 		break;
+    case 'getPortfolio':
+
+		$user = $_REQUEST['user'];
+
+        $query = $sql->query(
+            "select * from `Portfolio` `P` inner join `Customer` `C` " .
+            "where `C`.`id` = `P`.`cid` AND `C`.`name` = '{$user}';");
+        $result = $query->fetch_all();
+
+        echo json_encode($result);
+
+        break;
 }
 
 $sql->close();

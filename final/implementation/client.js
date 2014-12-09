@@ -1,5 +1,16 @@
 var url = "TEserver.php";
 
+function getPortfolio(username, callback) {
+    $.ajax({
+        dataType: 'json',
+        type: "POST",
+        url: url,
+        data: { command: "getPortfolio", user: username }
+    }).done(function(rtn) {
+        callback(rtn);
+    });
+}
+
 function authenticate(username) {
 	$.ajax({
 		dataType: 'json',
@@ -355,6 +366,21 @@ $(document).ready(function() {
     portfolioButton.on("click", function() {
         if ($(this).html() == "Portfolio")
         {
+            $("#portfolio-content > table").children("tbody").html("");
+            getPortfolio(localStorage['name'], function(rtn) {
+
+                var result = "";
+                for (var i = 0; i < rtn.length; i++)
+                {
+                    result += "<tr>";
+                    result += "<td>" + rtn[i][1] + "</td>";
+                    result += "<td>" + rtn[i][2] + "</td>";
+                    result += "<td>" + rtn[i][3] + "</td>";
+                    result += "</tr>";
+                }
+                $("#portfolio-content > table").children("tbody").html(result);
+
+            });
             $("#search-content").animate({"margin-top": "-1000px"}, function() {
                 $(this).hide(); 
                 portfolioButton.html("Search");
