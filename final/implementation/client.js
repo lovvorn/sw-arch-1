@@ -161,6 +161,8 @@ $(document).ready(function() {
     var portfolioButton = $("#portfolio");
     var buyButton = $("#buy");
     var sellButton = $("#sell");
+	var buySearchButton = $('#search_buy');
+	var buySymbol = $('#symbol_buy');
     var loading = contentArea.find(".loading");
     var stockInfoArea = contentArea.find(".stock-info");
     var openMenuButton = menuClosed.find("span");
@@ -202,6 +204,10 @@ $(document).ready(function() {
     searchBar.bind("enterKey", function() {
         searchButton.click();
     });
+	
+	buySymbol.bind("enterKey2", function() {
+        buySearchButton.click();
+    });
 
     searchBar.keyup(function(e) {
         if (e.keyCode == 13)
@@ -209,6 +215,29 @@ $(document).ready(function() {
             $(this).trigger("enterKey");
         }
     });
+	
+	buySymbol.keyup(function(e) {
+        if (e.keyCode == 13)
+        {
+            $(this).trigger("enterKey2");
+            e.Handled = true;
+        }
+    });
+	
+	buySearchButton.on('click', function() {
+		$.ajax({
+			dataType: 'json',
+			type: "POST",
+			url: url,
+			data: { command: "getStockPrice", symbol: buySymbol.val() }
+		})
+		.done(function(rtn) {
+			if(typeof rtn.error == 'undefined')
+			{
+				alert(rtn.test);
+			} 
+		});
+	});
 
     searchButton.on("click", function() {
 
