@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `Transactions` (
   `id` int(11) NOT NULL,
   `stock` varchar(5) NOT NULL DEFAULT '',
   `shares` int(11) NOT NULL DEFAULT '0',
+  `amount` decimal(10,2) NOT NULL,
   `ts` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`,`stock`,`shares`,`ts`)
+  PRIMARY KEY (`id`,`stock`,`shares`,`ts`,`amount`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
