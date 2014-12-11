@@ -11,6 +11,17 @@ function getPortfolio(username, callback) {
     });
 }
 
+function getTransactions(uid, callback) {
+    $.ajax({
+        dataType: 'json',
+        type: "POST",
+        url: url,
+        data: { command: "getTransactions", user: uid }
+    }).done(function(rtn) {
+        callback(rtn);
+    });
+}
+
 function authenticate(username) {
 	$.ajax({
 		dataType: 'json',
@@ -172,6 +183,7 @@ $(document).ready(function() {
     var searchBar = $("#symbol1");
 
     var portfolioButton = $("#portfolio");
+	var transactionsButton = $('#transactions');
     var buyButton = $("#buy");
     var sellButton = $("#sell");
 	var buySearchButton = $('#search_buy');
@@ -211,6 +223,7 @@ $(document).ready(function() {
 
     $("#portfolio-content").children("#error").hide();
     $("#portfolio-content").hide().animate({"margin-top": "-1000px"});
+    $("#transactions-content").hide().animate({"margin-top": "-1000px"});
 
     openMenuButton.on("mouseover", function() {
         showMenu();
@@ -456,6 +469,24 @@ $(document).ready(function() {
             });
         }
     });
+	
+	transactionsButton.on("click", function() {
+		$("#transactions-content > table").children("tbody").html("");
+		getTransactions(localStorage['uid'], function(rtn) {
+			var result = "";
+			for (var i = 0; i < rtn.length; i++)
+			{
+				result += "<tr>";
+				result += "<td class=\"sell-stock\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></td>";
+				result += "<td>" + rtn[i][1] + "</td>";
+				result += "<td>" + rtn[i][2] + "</td>";
+				result += "<td>" + rtn[i][3] + "</td>";
+				result += "</tr>";
+			}
+		    $("#transactions-content > table").children("tbody").html(result);
+
+		});
+	});
 
     cover.on("click", function() {
         buyWindow.animate({top: "-1000px"}, function() {
