@@ -58,7 +58,7 @@ switch($_REQUEST['command'])
 				$q = $sql->query("INSERT INTO `Portfolio` VALUES ('{$user}', '{$symbol}', '{$amount}', '{$total}');");
 			else
 				$q = $sql->query("UPDATE `Portfolio` SET `shares` = `shares` + '{$amount}', `purchase_price` = `purchase_price` + '{$total}' WHERE `cid` = '{$user}' AND `stock` = '{$symbol}';");
-			$q = $sql->query("INSERT INTO `Transactions` VALUES ('{$user}', '{$symbol}', '{$amount}', '{$now}');");
+			$q = $sql->query("INSERT INTO `Transactions` VALUES ('{$user}', '{$symbol}', '{$amount}', '{$total}', '{$now}');");
 			$q = $sql->query("UPDATE `Customer` SET `balance` = `balance` - '{$total}' WHERE `id` = '{$user}';");
 		}
 		
