@@ -3,9 +3,9 @@ if(!isset($_REQUEST['command']))
 	die('No command set');
 
 header('Content-Type: application/json');
-	
-#$sql = new MySQLi('localhost', 'dev', 'dev', 'test');
-$sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
+
+$sql = new MySQLi('localhost', 'dev', 'dev', 'test');
+//$sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
 
 switch($_REQUEST['command'])
 {
@@ -14,15 +14,16 @@ switch($_REQUEST['command'])
 		break;
 	case 'authenticate':
 		$user = $_REQUEST['user'];
-		
-		$q = $sql->query("SELECT COALESCE((SELECT `id` FROM `Customer` WHERE `name` = '{$user}'), '-1') AS `id`;"); 
+        $password = $_REQUEST['password'];
+
+        $q = $sql->query("SELECT COALESCE((SELECT `id` FROM `Customer` WHERE `name` = '{$user}' AND `password` = '{$password}'), '-1') AS `id`;"); 
 		$result = $q->fetch_assoc();
-		
+
 		echo json_encode(array('uid' => $result['id']));
 		break;
 	case 'searchBySymbol':
 		$rtn = getCurl("https://sandbox.tradier.com/v1/markets/quotes?symbols={$_REQUEST['symbol']}");
-		
+
 		if (strstr($rtn, 'unmatched_symbols'))
 			echo json_encode(array('error' => 'Unknown symbol'));
 		else
@@ -34,9 +35,9 @@ switch($_REQUEST['command'])
 	case 'canIAfford':
 		$user = $_REQUEST['user'];
 		$price = $_REQUEST['price'];
-		
+
 		$afford = canIAfford($user, $price);
-		
+
 		echo json_encode(array('afford' => $afford));
 		break;
 	case 'buy':
@@ -46,14 +47,14 @@ switch($_REQUEST['command'])
 		$price = $_REQUEST['price'];
 		$total = round($amount*$price, 2);
 		$now = date('Y-m-d H:i:s');
-		
+
 		$afford = canIAfford($user, $total);
-		
+
 		if ($afford)
 		{
 			$q = $sql->query("SELECT COALESCE((SELECT `shares` FROM `Portfolio` WHERE `cid` = '{$user}' AND `stock` = '{$symbol}'), '-1') AS `shares`;");
 			$result = $q->fetch_assoc();
-			
+
 			if($result['shares'] == -1)
 				$q = $sql->query("INSERT INTO `Portfolio` VALUES ('{$user}', '{$symbol}', '{$amount}', '{$total}');");
 			else
@@ -61,7 +62,7 @@ switch($_REQUEST['command'])
 			$q = $sql->query("INSERT INTO `Transactions` VALUES ('{$user}', '{$symbol}', '{$amount}', '{$now}');");
 			$q = $sql->query("UPDATE `Customer` SET `balance` = `balance` - '{$total}' WHERE `id` = '{$user}';");
 		}
-		
+
 		echo json_encode(array('success' => $afford));
 		break;
     case 'getPortfolio':
@@ -103,7 +104,7 @@ function getCurrentPrice($symbol, $buysell)
 function canIAfford($user, $price)
 {
 	global $sql;
-	
+
 	$q = $sql->query("SELECT `balance` FROM `Customer` WHERE id = '{$user}';"); 
 	$result = $q->fetch_assoc();
 	return ($result['balance'] > $price ? true : false);
