@@ -11,13 +11,16 @@ function getPortfolio(username, callback) {
     });
 }
 
-function authenticate(username) {
+function authenticate(username, password) {
 	$.ajax({
 		dataType: 'json',
 		type: "POST",
 		url: url,
-		data: { command: "authenticate", user: username }
-		})
+		data: {
+            command: "authenticate",
+            user: username,
+            password: password 
+        }})
 		.done(function( rtn ) {
 			if(rtn.uid != -1)
 			{
@@ -105,9 +108,10 @@ $(document).ready(function() {
     var attemptLogin = function()
     {
         var username = loginForm.find("#username").val();
+        var password = loginForm.find("#password").val();
         loginError.hide();
 
-        if (!authenticate(username))
+        if (!authenticate(username, password))
         {
             showLoginError();
         }
