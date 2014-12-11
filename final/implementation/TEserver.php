@@ -76,6 +76,42 @@ switch($_REQUEST['command'])
         echo json_encode($result);
 
         break;
+	case 'sellCheck':
+	
+		$user = $_REQUEST['user'];
+		$amount = $_REQUEST['amount'];
+		$symbol = strtoupper($_REQUEST['symbol']);
+		echo json_encode(array('afford' => $afford));
+		
+		break;
+		
+	case 'sell':
+		$user = $_REQUEST['user'];
+		$symbol = strtoupper($_REQUEST['symbol']);
+		$amount = $_REQUEST['amount'];
+		$price = $_REQUEST['price'];
+		$total = round($amount*$price, 2);
+		$now = date('Y-m-d H:i:s');	
+
+		$canSell = sellCheck($user, $amount, $symbol);
+		
+		if ($canSell)
+		{
+			$q = $sql->query("SELECT COALESCE((SELECT `shares` FROM `Portfolio` WHERE `cid` = '{$user}' AND `stock` = '{$symbol}'), '-1') AS `shares`;");
+			$result = $q->fetch_assoc();
+			
+			if($result['shares'] != -1)
+				$q = $sql->query("UPDATE `Portfolio` SET `shares` = `shares` - '{$amount}' WHERE `cid` = '{$user}' AND `stock` = '{$symbol}';");
+				$q = $sql->query("INSERT INTO `Transactions` VALUES ('{$user}', '{$symbol}', '{$amount}', '{$now}');");
+				$q = $sql->query("UPDATE `Customer` SET `balance` = `balance` + '{$total}' WHERE `id` = '{$user}';");
+		}
+		
+		echo json_encode(array('success' => $canSell));
+		break;
+		
+	case 'getSellPrice':
+		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'], 'sell')));
+		break;
 }
 
 $sql->close();
@@ -108,4 +144,12 @@ function canIAfford($user, $price)
 	$result = $q->fetch_assoc();
 	return ($result['balance'] > $price ? true : false);
 }
+
+function sellCheck($user, $amount, $symbol)
+{
+	$q = $sql->query("SELECT shares FROM 'portfolio' WHERE 'cid' = {$user} AND 'stock' LIKE '{$symbol}';")
+	$result = $q->fetch_assoc();
+	return ($result['shares'] > $amount ? true : false);
+}
+
 ?>
