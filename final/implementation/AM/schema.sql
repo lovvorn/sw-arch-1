@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `Customer` (
   `balance` decimal(10,2) DEFAULT NULL,
   `profit` decimal(10,2) DEFAULT NULL,
   `loss` decimal(10,2) DEFAULT NULL,
+  `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
