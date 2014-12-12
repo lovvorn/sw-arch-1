@@ -155,7 +155,9 @@ function canIAfford($user, $price)
 
 function sellCheck($user, $amount, $symbol)
 {
-	$q = $sql->query("SELECT shares FROM 'portfolio' WHERE 'cid' = {$user} AND 'stock' LIKE '{$symbol}';");
+    global $sql;
+
+    $q = $sql->query("SELECT shares FROM `portfolio` WHERE `cid` = '{$user}' AND `stock` LIKE '{$symbol}';");
 	$result = $q->fetch_assoc();
 	return ($result['shares'] > $amount ? true : false);
 }
