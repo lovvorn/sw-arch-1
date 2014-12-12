@@ -105,10 +105,11 @@ switch($_REQUEST['command'])
 			$result = $q->fetch_assoc();
 			
 			if($result['shares'] != -1)
-				$q = $sql->query("UPDATE `Portfolio` SET `shares` = `shares` - '{$amount}' WHERE `cid` = '{$user}' AND `stock` = '{$symbol}';");
+				$q = $sql->query("UPDATE `Portfolio` SET `shares` = `shares` - '{$amount}', `purchase_price` = `purchase_price` - '{$total}' WHERE `cid` = '{$user}' AND `stock` = '{$symbol}';");
 				$q = $sql->query("INSERT INTO `Transactions` VALUES ('{$user}', '{$symbol}', '-{$amount}', '{$total}', '{$now}');");
 				$q = $sql->query("UPDATE `Customer` SET `balance` = `balance` + '{$total}' WHERE `id` = '{$user}';");
-		}
+		}		$q = $sql->query("SELECT 'shares' FROM 'Portfolio' WHERE 'cid' = '{$user}' AND 'stock' = '{$symbol}';");
+				$q = $sql->query("DELETE FROM `portfolio` WHERE shares = 0");
 		
 		echo json_encode(array('success' => $canSell));
 		break;
