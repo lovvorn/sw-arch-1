@@ -4,8 +4,8 @@ if(!isset($_REQUEST['command']))
 
 header('Content-Type: application/json');
 
-#$sql = new MySQLi('localhost', 'dev', 'dev', 'test');
-$sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
+$sql = new MySQLi('localhost', 'root', '', 'hbl20');
+//$sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
 
 switch($_REQUEST['command'])
 {
@@ -31,6 +31,9 @@ switch($_REQUEST['command'])
 		break;
 	case 'getStockPrice':
 		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'], 'buy')));
+		break;
+	case 'getSellPrice':
+		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'], 'sell')));
 		break;
 	case 'canIAfford':
 		$user = $_REQUEST['user'];
@@ -103,16 +106,16 @@ switch($_REQUEST['command'])
 			
 			if($result['shares'] != -1)
 				$q = $sql->query("UPDATE `Portfolio` SET `shares` = `shares` - '{$amount}' WHERE `cid` = '{$user}' AND `stock` = '{$symbol}';");
-				$q = $sql->query("INSERT INTO `Transactions` VALUES ('{$user}', '{$symbol}', '{$amount}', '{$now}');");
+				$q = $sql->query("INSERT INTO `Transactions` VALUES ('{$user}', '{$symbol}', '-{$amount}', '{$total}', '{$now}');");
 				$q = $sql->query("UPDATE `Customer` SET `balance` = `balance` + '{$total}' WHERE `id` = '{$user}';");
 		}
 		
 		echo json_encode(array('success' => $canSell));
 		break;
 		
-	case 'getSellPrice':
-		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'], 'sell')));
-		break;
+	//case 'getSellPrice':
+	//	echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'], 'sell')));
+	//	break;
 	case 'getTransactions':
 		$q = $sql->query("SELECT * FROM `Transactions` WHERE `id` = '{$_REQUEST['user']}';");
 		echo json_encode($q->fetch_all(MYSQLI_ASSOC));
@@ -152,9 +155,11 @@ function canIAfford($user, $price)
 
 function sellCheck($user, $amount, $symbol)
 {
-	$q = $sql->query("SELECT shares FROM 'portfolio' WHERE 'cid' = {$user} AND 'stock' LIKE '{$symbol}';");
+    global $sql;
+
+    $q = $sql->query("SELECT shares FROM `portfolio` WHERE `cid` = '{$user}' AND `stock` LIKE '{$symbol}';");
 	$result = $q->fetch_assoc();
-	return ($result['shares'] > $amount ? true : false);
+	return ($result['shares'] >= $amount ? true : false);
 }
 
 ?>

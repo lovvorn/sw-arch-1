@@ -28,9 +28,24 @@
 			</div>
         </div>
 
-        <div class="buy-sell" id="sell-window">
-            <h3 style="margin-top: 0"></h3>
-            <span></span>
+        <div class="buy-sell" id="sell-window" style="height:350px;">
+            <div class="input-group">
+                <input type="text" style="border-bottom-left-radius: 3px" class="form-control" id="symbol_sell" placeholder="Enter symbol.  e.g. aapl, goog" required/>
+                <span class="input-group-addon" id="search_sell"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+            </div>
+
+            <br>
+            <div id="sell-stock-error" class="alert alert-danger">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            </div>
+
+			<div id="sell_container">
+				<div class="h3" id="sell_current_price_visible"></div>
+				<input type="hidden" id="sell_current_price" />
+				<label>Number of Shares: <input type="number" required class="form-control" id='sell_num_stock' min="1" step="1" value="1" /></label>
+				<div class="h2" id="sell_total"></div>
+				<button type="button" class="btn btn-default" id="sellStock">Sell</button>
+			</div>
         </div>
 
         <div id="menu-opened" class="col-md-2 sidebar opened">
@@ -42,7 +57,7 @@
                 <span id="user_welcome"></span>
             </p>
             <button id="buy" class="btn submit-button btn-lg btn-100" >Buy</button>
-            <button id="sell" class="btn submit-button btn-lg btn-100" >Sell</button>
+            <button id="sell" style="display: none" class="btn submit-button btn-lg btn-100" >Sell</button>
             <button id="portfolio" class="btn submit-button btn-lg btn-100" >Portfolio</button>
             <button id="transactions" class="btn submit-button btn-lg btn-100" >Transactions</button>
             <button id="logout" class="btn submit-button btn-lg btn-100" >Logout</button>

@@ -84,6 +84,7 @@ $(document).ready(function() {
     var loginButton = loginForm.find("button");
     var loginError = loginForm.find(".alert");
 	var buyContainer = $('#buy_container');
+	var sellContainer = $('#sell_container');
 
     var showRegisterForm = function()
     {
@@ -201,6 +202,14 @@ $(document).ready(function() {
     var stockInfoArea = contentArea.find(".stock-info");
     var openMenuButton = menuClosed.find("span");
     var closedMenuButton = menuOpened.find("span");
+	var sellButton = $("#sell");
+	var sellSearchButton = $('#search_sell');
+	var sellSymbol = $('#symbol_sell');
+	var sellNumStock = $('#sell_num_stock');
+	var sellTotal = $('#sell_total');
+	var sellCurrentPriceVisible = $('#sell_current_price_visible');
+	var sellCurrentPriceHidden = $('#sell_current_price');
+	var sellStock = $('#sellStock');	
 
     var buyWindow = $("#buy-window");
     var sellWindow = $("#sell-window");
@@ -224,6 +233,7 @@ $(document).ready(function() {
     sellWindow.hide();
     stockInfoArea.find("error").hide();
     searchBar.focus();
+    $("#sell-stock-error").hide();
 
     $("#portfolio-content").children("#error").hide();
     $("#portfolio-content").hide().animate({"margin-top": "-1000px"});
@@ -409,26 +419,139 @@ $(document).ready(function() {
         buyWindow.animate({top: "20%"});
     });
 
+	
+	sellSymbol.bind("enterKey3", function() {
+		sellSearchButton.click();
+	});
+	
+	sellSymbol.keyup(function(e) {
+		if (e.keyCode == 13)
+		{
+			$(this).trigger("enterKey3");
+			e.Handled = true;
+		}
+	});
+	
+	sellSearchButton.on('click', function() {
+		$.ajax({
+			dataType: 'json',
+			type: "POST",
+			url: url,
+			data: { command: "getSellPrice", symbol: sellSymbol.val() }
+		})
+		.done(function(rtn) {
+			if(typeof rtn.error == 'undefined')
+			{
+				sellCurrentPriceVisible.html('Current Price: $'+rtn.price);
+				sellCurrentPriceHidden.val(rtn.price);
+				sellContainer.show();
+			} 
+		});
+	});
+	
+	
+	sellNumStock.on('change', function() {
+		var price = parseFloat(sellCurrentPriceHidden.val()*sellNumStock.val()).toFixed(2);
+		sellTotal.html('Total: $'+(price));
+		
+		$.ajax({
+					dataType: 'json',
+					type: "POST",
+					url: url,
+					async: false,
+					data: { command: "sellCheck", user: localStorage['uid'], amount: sellNumStock.val(), symbol: sellSymbol.val()}
+				})
+				.done(function(rtn) {
+					if(typeof rtn.error == 'undefined')
+					{
+						if (rtn.afford)
+						{
+							sellTotal.addClass('text-success');
+							sellTotal.removeClass('text-danger');
+							sellStock.removeAttr("disabled");
+						} else {
+							sellTotal.addClass('text-danger');
+							sellTotal.removeClass('text-success');
+							sellStock.attr('disabled', 'disabled');
+						}
+					} 
+
+				});
+	});
+
+    var maxshares;
+    var disabled = false;
+
+    $("#sell_num_stock").on("change", function() {
+        if (parseInt($(this).val()) > maxshares)
+        {
+            sellSearchButton.trigger("click");
+            $("#sell-stock-error").html('<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> You can only sell a maximum of ' + maxshares + ' shares.');
+            sellWindow.animate({height: "420px"}, function() {
+                $("#sell-stock-error").fadeIn();
+            });
+
+            disabled = true;
+            $("#sellStock").attr("disabled", "disabled");
+        }
+        else
+        {
+            if (disabled)
+            {
+                $("#sellStock").removeAttr("disabled"); 
+
+                disabled = false;
+            }
+        }
+
+    });
+
     sellButton.on("click", function(e, symbol, shares) {
-
-        if (portfolioButton.html() == "Portfolio")
-        {
-            portfolioButton.trigger("click");
-        }
-
-        if (typeof symbol === 'undefined' || typeof shares === 'undefined')
-        {
-            $("#portfolio-content").children('#error').fadeIn();
-            return;
-        }
-
+        maxshares = shares;
         cover.fadeIn();
 
-        sellWindow.children("h3").html("Selling " + symbol);
-        sellWindow.children("span").html("You have <strong><em>" + shares + "</em></strong> share(s) to sell.");
+        if (symbol != null)
+        {
+            sellWindow.find("#symbol_sell").val(symbol);
+            sellSearchButton.trigger("click");
+            sellCurrentPriceVisible.html("Loading current price...");
+            $("#sell_num_stock").attr("max", shares);
+        }
+
         sellWindow.show();
-        sellWindow.animate({top: "20%"});
+        sellWindow.animate({top: "20%"}, function() {
+
+        });
     });
+
+	
+	sellStock.on('click', function() {
+		$.ajax({
+			dataType: 'json',
+			type: "POST",
+			url: url,
+			async: false,
+			data: { command: "sell", symbol: sellSymbol.val(), amount: sellNumStock.val(), user: localStorage['uid'], price: sellCurrentPriceHidden.val() }
+		})
+		.done(function(rtn) {
+			if(typeof rtn.error == 'undefined')
+			{
+				if(rtn.success)
+				{
+					alert('Successfull sale.');
+					sellSymbol.val('');
+					sellCurrentPriceVisible.html('');
+					sellCurrentPriceHidden.val('');
+					sellTotal.html('');
+					sellNumStock.val('1');
+    				sellWindow.hide();
+            		cover.fadeOut();
+				} else
+					alert('Sale failed.');
+			} 
+		});
+	});
+	
 
     $("#portfolio-content > table > tbody").on("click", ".sell-stock", function(e) {
         var symbol = $(this).parent().children("td").eq(1).html();
@@ -438,6 +561,7 @@ $(document).ready(function() {
     });
 
     portfolioButton.on("click", function() {
+        $("#transactions-content").hide();
 
         $("#portfolio-content").children("#error").hide();
 
@@ -475,6 +599,8 @@ $(document).ready(function() {
     });
 	
 	transactionsButton.on("click", function() {
+        $("#portfolio-content").hide();
+        $("#search-content").hide();
 		$("#transactions-content").show().animate({"margin-top": "0px"});
 		$("#transactions-content > table").children("tbody").html("");
 		getTransactions(localStorage['uid'], function(rtn) {
