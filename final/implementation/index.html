@@ -33,6 +33,12 @@
                 <input type="text" style="border-bottom-left-radius: 3px" class="form-control" id="symbol_sell" placeholder="Enter symbol.  e.g. aapl, goog" required/>
                 <span class="input-group-addon" id="search_sell"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
             </div>
+
+            <br>
+            <div id="sell-stock-error" class="alert alert-danger">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            </div>
+
 			<div id="sell_container">
 				<div class="h3" id="sell_current_price_visible"></div>
 				<input type="hidden" id="sell_current_price" />
@@ -51,7 +57,6 @@
                 <span id="user_welcome"></span>
             </p>
             <button id="buy" class="btn submit-button btn-lg btn-100" >Buy</button>
-            <button id="sell" class="btn submit-button btn-lg btn-100" >Sell</button>
             <button id="portfolio" class="btn submit-button btn-lg btn-100" >Portfolio</button>
             <button id="transactions" class="btn submit-button btn-lg btn-100" >Transactions</button>
             <button id="logout" class="btn submit-button btn-lg btn-100" >Logout</button>

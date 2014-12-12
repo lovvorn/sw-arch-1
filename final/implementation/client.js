@@ -233,6 +233,7 @@ $(document).ready(function() {
     sellWindow.hide();
     stockInfoArea.find("error").hide();
     searchBar.focus();
+    $("#sell-stock-error").hide();
 
     $("#portfolio-content").children("#error").hide();
     $("#portfolio-content").hide().animate({"margin-top": "-1000px"});
@@ -477,10 +478,36 @@ $(document).ready(function() {
 
 				});
 	});
-	
-	
-	
+
+    var maxshares;
+    var disabled = false;
+
+    $("#sell_num_stock").on("change", function() {
+        if (parseInt($(this).val()) > maxshares)
+        {
+            sellSearchButton.trigger("click");
+            $("#sell-stock-error").html('<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> You can only sell a maximum of ' + maxshares + ' shares.');
+            sellWindow.animate({height: "420px"}, function() {
+                $("#sell-stock-error").fadeIn();
+            });
+
+            disabled = true;
+            $("#sellStock").attr("disabled", "disabled");
+        }
+        else
+        {
+            if (disabled)
+            {
+                $("#sellStock").removeAttr("disabled"); 
+
+                disabled = false;
+            }
+        }
+
+    });
+
     sellButton.on("click", function(e, symbol, shares) {
+        maxshares = shares;
         cover.fadeIn();
 
         if (symbol != null)
@@ -488,6 +515,7 @@ $(document).ready(function() {
             sellWindow.find("#symbol_sell").val(symbol);
             sellSearchButton.trigger("click");
             sellCurrentPriceVisible.html("Loading current price...");
+            $("#sell_num_stock").attr("max", shares);
         }
 
         sellWindow.show();
