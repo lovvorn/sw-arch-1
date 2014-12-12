@@ -491,6 +491,7 @@ $(document).ready(function() {
 				result += "<td>" + rtn[i]['stock'] + "</td>";
 				result += "<td>" + rtn[i]['shares'] + "</td>";
 				result += "<td>$" + rtn[i]['amount'] + "</td>";
+				result += "<td>" + rtn[i]['ts'] + "</td>";
 				result += "</tr>";
 			}
 		    $("#transactions-content > table").children("tbody").html(result);
