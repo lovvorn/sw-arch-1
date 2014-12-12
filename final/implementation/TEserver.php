@@ -4,7 +4,7 @@ if(!isset($_REQUEST['command']))
 
 header('Content-Type: application/json');
 
-$sql = new MySQLi('localhost', 'dev', 'dev', 'test');
+$sql = new MySQLi('localhost', 'root', '', 'hbl20');
 //$sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
 
 switch($_REQUEST['command'])
@@ -106,7 +106,7 @@ switch($_REQUEST['command'])
 			
 			if($result['shares'] != -1)
 				$q = $sql->query("UPDATE `Portfolio` SET `shares` = `shares` - '{$amount}' WHERE `cid` = '{$user}' AND `stock` = '{$symbol}';");
-				$q = $sql->query("INSERT INTO `Transactions` VALUES ('{$user}', '{$symbol}', '-{$amount}', '{$price}', '{$now}');");
+				$q = $sql->query("INSERT INTO `Transactions` VALUES ('{$user}', '{$symbol}', '-{$amount}', '{$total}', '{$now}');");
 				$q = $sql->query("UPDATE `Customer` SET `balance` = `balance` + '{$total}' WHERE `id` = '{$user}';");
 		}
 		
