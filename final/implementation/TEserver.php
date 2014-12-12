@@ -113,6 +113,9 @@ switch($_REQUEST['command'])
 	case 'getSellPrice':
 		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'], 'sell')));
 		break;
+	case 'getTransactions':
+	
+		break;
 }
 
 $sql->close();

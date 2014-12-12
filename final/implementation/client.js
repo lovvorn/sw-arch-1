@@ -475,6 +475,7 @@ $(document).ready(function() {
     });
 	
 	transactionsButton.on("click", function() {
+		$("#transactions-content").show().animate({"margin-top": "0px"});
 		$("#transactions-content > table").children("tbody").html("");
 		getTransactions(localStorage['uid'], function(rtn) {
 			var result = "";
