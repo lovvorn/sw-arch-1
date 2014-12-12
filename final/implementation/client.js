@@ -561,6 +561,7 @@ $(document).ready(function() {
     });
 
     portfolioButton.on("click", function() {
+        $("#transactions-content").hide();
 
         $("#portfolio-content").children("#error").hide();
 
@@ -598,6 +599,8 @@ $(document).ready(function() {
     });
 	
 	transactionsButton.on("click", function() {
+        $("#portfolio-content").hide();
+        $("#search-content").hide();
 		$("#transactions-content").show().animate({"margin-top": "0px"});
 		$("#transactions-content > table").children("tbody").html("");
 		getTransactions(localStorage['uid'], function(rtn) {
