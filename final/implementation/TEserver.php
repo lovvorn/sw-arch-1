@@ -106,7 +106,7 @@ switch($_REQUEST['command'])
 			
 			if($result['shares'] != -1)
 				$q = $sql->query("UPDATE `Portfolio` SET `shares` = `shares` - '{$amount}' WHERE `cid` = '{$user}' AND `stock` = '{$symbol}';");
-				$q = $sql->query("INSERT INTO `Transactions` VALUES ('{$user}', '{$symbol}', '{$amount}', '{$now}');");
+				$q = $sql->query("INSERT INTO `Transactions` VALUES ('{$user}', '{$symbol}', '-{$amount}', '{$price}', '{$now}');");
 				$q = $sql->query("UPDATE `Customer` SET `balance` = `balance` + '{$total}' WHERE `id` = '{$user}';");
 		}
 		
@@ -159,7 +159,7 @@ function sellCheck($user, $amount, $symbol)
 
     $q = $sql->query("SELECT shares FROM `portfolio` WHERE `cid` = '{$user}' AND `stock` LIKE '{$symbol}';");
 	$result = $q->fetch_assoc();
-	return ($result['shares'] > $amount ? true : false);
+	return ($result['shares'] >= $amount ? true : false);
 }
 
 ?>
