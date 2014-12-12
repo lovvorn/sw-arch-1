@@ -4,8 +4,8 @@ if(!isset($_REQUEST['command']))
 
 header('Content-Type: application/json');
 
-$sql = new MySQLi('localhost', 'dev', 'dev', 'test');
-//$sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
+#$sql = new MySQLi('localhost', 'dev', 'dev', 'test');
+$sql = new MySQLi('localhost', 'hbl20', 'tmppass1', 'hbl20');
 
 switch($_REQUEST['command'])
 {
@@ -114,7 +114,8 @@ switch($_REQUEST['command'])
 		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'], 'sell')));
 		break;
 	case 'getTransactions':
-	
+		$q = $sql->query("SELECT * FROM `Transactions` WHERE `id` = '{$_REQUEST['user']}';");
+		echo json_encode($q->fetch_all(MYSQLI_ASSOC));
 		break;
 }
 

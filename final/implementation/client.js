@@ -482,10 +482,15 @@ $(document).ready(function() {
 			for (var i = 0; i < rtn.length; i++)
 			{
 				result += "<tr>";
-				result += "<td class=\"sell-stock\"><span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></td>";
-				result += "<td>" + rtn[i][1] + "</td>";
-				result += "<td>" + rtn[i][2] + "</td>";
-				result += "<td>" + rtn[i][3] + "</td>";
+				result += "<td>"
+				if (rtn[i]['shares'] > 0)
+					result += 'Bought';
+				else
+					result += 'Sold';
+				result += "</td>";
+				result += "<td>" + rtn[i]['stock'] + "</td>";
+				result += "<td>" + rtn[i]['shares'] + "</td>";
+				result += "<td>$" + rtn[i]['amount'] + "</td>";
 				result += "</tr>";
 			}
 		    $("#transactions-content > table").children("tbody").html(result);
