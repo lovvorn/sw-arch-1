@@ -482,8 +482,18 @@ $(document).ready(function() {
 	
     sellButton.on("click", function(e, symbol, shares) {
         cover.fadeIn();
+
+        if (symbol != null)
+        {
+            sellWindow.find("#symbol_sell").val(symbol);
+            sellSearchButton.trigger("click");
+            sellCurrentPriceVisible.html("Loading current price...");
+        }
+
         sellWindow.show();
-        sellWindow.animate({top: "20%"});
+        sellWindow.animate({top: "20%"}, function() {
+
+        });
     });
 
 	
