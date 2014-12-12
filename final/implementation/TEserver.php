@@ -32,6 +32,9 @@ switch($_REQUEST['command'])
 	case 'getStockPrice':
 		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'], 'buy')));
 		break;
+	case 'getSellPrice':
+		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'], 'sell')));
+		break;
 	case 'canIAfford':
 		$user = $_REQUEST['user'];
 		$price = $_REQUEST['price'];
@@ -110,9 +113,9 @@ switch($_REQUEST['command'])
 		echo json_encode(array('success' => $canSell));
 		break;
 		
-	case 'getSellPrice':
-		echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'], 'sell')));
-		break;
+	//case 'getSellPrice':
+	//	echo json_encode(array('price' => getCurrentPrice($_REQUEST['symbol'], 'sell')));
+	//	break;
 	case 'getTransactions':
 		$q = $sql->query("SELECT * FROM `Transactions` WHERE `id` = '{$_REQUEST['user']}';");
 		echo json_encode($q->fetch_all(MYSQLI_ASSOC));
